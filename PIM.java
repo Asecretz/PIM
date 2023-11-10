@@ -133,13 +133,7 @@ public class PIM {
     }
 
     public void print(){
-        // testing
-        if(pirList.isEmpty()){
-            System.out.println("It is empty");
-        } else{
-            System.out.println("It is not empty");
-            System.out.println("There are "+pirList.size()+" files");
-        }
+
     }
 
     public void delete(){
@@ -159,7 +153,6 @@ public class PIM {
         if (directory.exists() && directory.isDirectory()) {
             File[] files = directory.listFiles();
             for (File file : files) {
-                System.out.println("for Loop"); // for testing
                 if (file.getName().contains("A")) {
                     // Create ContactPIR
                     String fileNameA = file.getName();
@@ -189,10 +182,10 @@ public class PIM {
                             }
                             PIR pir = new ContactPIR(type, Integer.parseInt(id), name, address, mobileNo);
                             pirList.add(pir);
-                            System.out.println("Load 1 A"); // for testing
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
+                    }
                     } else if (file.getName().contains("B")) {
                         // Create NotePIR
                         String fileNameB = file.getName();
@@ -219,7 +212,6 @@ public class PIM {
                                 }
                                 PIR pir = new NotePIR(type, Integer.parseInt(id), title, text);
                                 pirList.add(pir);
-                                System.out.println("Load 1 B"); // for testing
                             } catch (IOException e) {
                                 e.printStackTrace();
                             }
@@ -253,54 +245,51 @@ public class PIM {
                                 }
                                 PIR pir = new ToDoPIR(type, Integer.parseInt(id), title, description, deadline);
                                 pirList.add(pir);
-                                System.out.println("Load 1 C"); // for testing
                             } catch (IOException e) {
                                 e.printStackTrace();
                             }
-                        } else if (file.getName().contains("D")) {
-                            // Create EventPIR
-                            String fileNameD = file.getName();
-                            Pattern idPatternD = Pattern.compile("[A-Za-z]*(\\d+).*");
-                            Matcher idMatcherD = idPatternD.matcher(fileNameD);
-                            if (idMatcherD.matches()) {
-                                String id = idMatcherD.group(1);
-                                String type = "Event";
-                                String title = null;
-                                String description = null;
-                                String date = null;
-                                String startTime = null;
-                                String endTime = null;
-                                Pattern pattern = Pattern.compile(":\\s*(.*)");
-                                try (BufferedReader br = new BufferedReader(new FileReader((file)))) {
-                                    String line;
-                                    while ((line = br.readLine()) != null) {
-                                        Matcher matcher = pattern.matcher(line);
-                                        if (matcher.find()) {
-                                            String information = matcher.group(1);
-                                            if (line.contains("Title: ")) {
-                                                title = information;
-                                            } else if (line.contains("Description: ")) {
-                                                description = information;
-                                            } else if (line.contains("Date: ")) {
-                                                date = information;
-                                            } else if (line.contains("Start Time: ")) {
-                                                startTime = information;
-                                            } else if (line.contains("End Time: ")) {
-                                                endTime = information;
-                                            }
-                                        }
-                                    }
-                                    PIR pir = new EventPIR(type, Integer.parseInt(id), title, description, date, startTime, endTime);
-                                    pirList.add(pir);
-                                    System.out.println("Load 1 D"); // for testing
-                                } catch (IOException e) {
-                                    e.printStackTrace();
-                                }
-                            } else {
-                                System.out.println("=== Wrong FileName Detected ===");
-                                break;
-                            }
                         }
+                } else if (file.getName().contains("D")) {
+                    // Create EventPIR
+                    String fileNameD = file.getName();
+                    Pattern idPatternD = Pattern.compile("[A-Za-z]*(\\d+).*");
+                    Matcher idMatcherD = idPatternD.matcher(fileNameD);
+                    if (idMatcherD.matches()) {
+                        String id = idMatcherD.group(1);
+                        String type = "Event";
+                        String title = null;
+                        String description = null;
+                        String date = null;
+                        String startTime = null;
+                        String endTime = null;
+                        Pattern pattern = Pattern.compile(":\\s*(.*)");
+                        try (BufferedReader br = new BufferedReader(new FileReader((file)))) {
+                            String line;
+                            while ((line = br.readLine()) != null) {
+                                Matcher matcher = pattern.matcher(line);
+                                if (matcher.find()) {
+                                    String information = matcher.group(1);
+                                    if (line.contains("Title: ")) {
+                                        title = information;
+                                    } else if (line.contains("Description: ")) {
+                                        description = information;
+                                    } else if (line.contains("Date: ")) {
+                                        date = information;
+                                    } else if (line.contains("Start Time: ")) {
+                                        startTime = information;
+                                    } else if (line.contains("End Time: ")) {
+                                        endTime = information;
+                                    }
+                                }
+                            }
+                            PIR pir = new EventPIR(type, Integer.parseInt(id), title, description, date, startTime, endTime);
+                            pirList.add(pir);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    } else {
+                        System.out.println("=== Wrong FileName Detected ===");
+                        break;
                     }
                 }
             }
