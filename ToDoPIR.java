@@ -7,8 +7,8 @@ public class ToDoPIR extends PIR{
     String description;
     String deadline;
 
-    ToDoPIR(String type, int id, String title, String description, String deadline){
-        super(type, id);
+    ToDoPIR(String type, int id,String topic ,String title, String description, String deadline){
+        super(type, id, topic);
         this.title = title;
         this.description = description;
         this.deadline = deadline;
@@ -17,6 +17,7 @@ public class ToDoPIR extends PIR{
     void store(){
         String fileName = "C"+id+".pim";
         String heading = "=== To-do ===\n";
+        String topic = "Topic: "+super.topic+"\n";
         String contentTitle = "Title: "+title+"\n";
         String contentDescription = "Description: "+description+"\n";
         String contentDeadline = "Deadline: "+deadline+"\n";
@@ -24,7 +25,7 @@ public class ToDoPIR extends PIR{
         try{
             File file = new File(path+"/"+fileName);
             FileWriter fileWriter = new FileWriter(file);
-            fileWriter.write(heading+contentTitle+contentDescription+contentDeadline+closing);
+            fileWriter.write(heading+topic+contentTitle+contentDescription+contentDeadline+closing);
             fileWriter.close();
             System.out.println("=== File created successfully ===");
         } catch (IOException e){
@@ -36,10 +37,35 @@ public class ToDoPIR extends PIR{
     void print(){
         String fileName = "C"+id+".pim";
         String heading = "=== To-do ===\n";
+        String topic = "Topic: "+super.topic+"\n";
         String contentTitle = "Title: "+title+"\n";
         String contentDescription = "Description: "+description+"\n";
         String contentDeadline = "Deadline: "+deadline+"\n";
         String closing = "--- End of "+fileName+" PIR ---\n=====================";
         System.out.println(heading+contentTitle+contentDescription+contentDeadline+closing);
+    }
+
+    public void setTitle(String title){
+        this.title = title;
+    }
+
+    public String getTitle(){
+        return title;
+    }
+
+    public void setDescription(String description){
+        this.description = description;
+    }
+
+    public String getDescription(){
+        return description;
+    }
+
+    public void setDeadline(String deadline){
+        this.deadline = deadline;
+    }
+
+    public String getDeadline(){
+        return deadline;
     }
 }

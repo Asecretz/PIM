@@ -7,6 +7,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import static java.lang.System.exit;
+import static java.lang.System.in;
 
 public class PIM {
 
@@ -57,59 +58,72 @@ public class PIM {
         if(input == 1){
             String type = "Contact";
             int id = getCountNo();
+            System.out.print("Please enter the topic of the PIR");
+            String topic = sc.nextLine();
             System.out.print("Please enter the name of contact: ");
-            String tmpName = sc.nextLine();
+            String name = sc.nextLine();
             System.out.print("Please enter the address of contact: ");
-            String tmpAddress = sc.nextLine();
+            String address = sc.nextLine();
             System.out.print("Please enter the mobile number of contact: ");
-            String tmpMobileNo = sc.nextLine();
-            pir = new ContactPIR(type,id,tmpName,tmpAddress,tmpMobileNo);
+            String mobileNo = sc.nextLine();
+            pir = new ContactPIR(type,id,topic,name,address,mobileNo);
             pir.store();
             pirList.add(pir);
         } else if(input == 2){
             String type = "Note";
             int id = getCountNo();
+            System.out.print("Please enter the topic of the PIR");
+            String topic = sc.nextLine();
             System.out.print("Please enter the title of note: ");
-            String tmpTitle = sc.nextLine();
+            String title = sc.nextLine();
             System.out.print("Please enter the content of note: ");
-            String tempContent = sc.nextLine();
-            pir = new NotePIR(type,id,tmpTitle,tempContent);
+            String content = sc.nextLine();
+            pir = new NotePIR(type,id,topic,title,content);
             pir.store();
             pirList.add(pir);
         } else if(input == 3){
             String type = "todo";
             int id = getCountNo();
+            System.out.print("Please enter the topic of the PIR");
+            String topic = sc.nextLine();
             System.out.print("Please enter the title of to-do: ");
-            String tmpTitle = sc.nextLine();
+            String title = sc.nextLine();
             System.out.print("Please enter the description of to-do: ");
-            String tmpDescription = sc.nextLine();
+            String description = sc.nextLine();
             System.out.print("Please enter the date (DD-MM-YY): ");
-            String tmpDate = sc.nextLine();
-            pir = new ToDoPIR(type,id,tmpTitle,tmpDescription,tmpDate);
+            String date = sc.nextLine();
+            pir = new ToDoPIR(type,id,topic,title,description,date);
             pir.store();
             pirList.add(pir);
         } else if(input == 4){
             String type = "Event";
             int id = getCountNo();
+            System.out.print("Please enter the topic of the PIR");
+            String topic = sc.nextLine();
             System.out.print("Please enter the title of event: ");
-            String tmpTitle = sc.nextLine();
+            String title = sc.nextLine();
             System.out.print("Please enter the description of event: ");
-            String tmpDescription = sc.nextLine();
+            String description = sc.nextLine();
             System.out.print("Please enter the date of event (DD-MM-YY): ");
-            String tmpDate = sc.nextLine();
+            String date = sc.nextLine();
             System.out.print("Please enter the start time of the event (hh-mm): ");
-            String tmpStartTime = sc.nextLine();
+            String startTime = sc.nextLine();
             System.out.print("Please enter the end time of the event (hh-mm): ");
-            String tmpEndTime = sc.nextLine();
-            pir = new EventPIR(type,id,tmpTitle,tmpDescription,tmpDate,tmpStartTime,tmpEndTime);
+            String endTime = sc.nextLine();
+            pir = new EventPIR(type,id,topic,title,description,date,startTime,endTime);
             pir.store();
             pirList.add(pir);
         }
     }
 
     public void modify(){
-        // ____ Part
-        // search file name then ask for user modify what
+        Scanner sc = new Scanner(System.in);
+        int fileCounter = 1;
+        System.out.println("===== Modify =====");
+        System.out.println("There are "+getCountNo()+" PIRs");
+        for(PIR pir:pirList){
+            System.out.println(fileCounter+"."+pir.type+"\t");
+        }
     }
 
     public void search(){
@@ -197,6 +211,7 @@ public class PIM {
                     if (idMatcherA.matches()) {
                         String id = idMatcherA.group(1);
                         String type = "Contact";
+                        String topic = null;
                         String name = null;
                         String address = null;
                         String mobileNo = null;
@@ -207,7 +222,9 @@ public class PIM {
                                 Matcher matcher = pattern.matcher(line);
                                 if (matcher.find()) {
                                     String information = matcher.group(1);
-                                    if (line.contains("Name: ")) {
+                                    if(line.contains("Topic: ")){
+                                        topic = information;
+                                    } else if (line.contains("Name: ")) {
                                         name = information;
                                     } else if (line.contains("Address: ")) {
                                         address = information;
@@ -216,7 +233,7 @@ public class PIM {
                                     }
                                 }
                             }
-                            PIR pir = new ContactPIR(type, Integer.parseInt(id), name, address, mobileNo);
+                            PIR pir = new ContactPIR(type, Integer.parseInt(id), topic, name, address, mobileNo);
                             pirList.add(pir);
                         } catch (IOException e) {
                             e.printStackTrace();
@@ -231,6 +248,7 @@ public class PIM {
                     if (idMatcherB.matches()) {
                         String id = idMatcherB.group(1);
                         String type = "Note";
+                        String topic = null;
                         String title = null;
                         String text = null;
                         Pattern pattern = Pattern.compile(":\\s*(.*)");
@@ -240,14 +258,16 @@ public class PIM {
                                 Matcher matcher = pattern.matcher(line);
                                 if (matcher.find()) {
                                     String information = matcher.group(1);
-                                    if (line.contains("Title: ")) {
+                                    if(line.contains("Topic: ")){
+                                        topic = information;
+                                    }else if (line.contains("Title: ")) {
                                         title = information;
                                     } else if (line.contains("Texts: ")) {
                                         text = information;
                                     }
                                 }
                             }
-                            PIR pir = new NotePIR(type, Integer.parseInt(id), title, text);
+                            PIR pir = new NotePIR(type, Integer.parseInt(id), topic, title, text);
                             pirList.add(pir);
                         } catch (IOException e) {
                             e.printStackTrace();
@@ -262,6 +282,7 @@ public class PIM {
                     if (idMatcherC.matches()) {
                         String id = idMatcherC.group(1);
                         String type = "ToDo";
+                        String topic = null;
                         String title = null;
                         String description = null;
                         String deadline = null;
@@ -272,7 +293,9 @@ public class PIM {
                                 Matcher matcher = pattern.matcher(line);
                                 if (matcher.find()) {
                                     String information = matcher.group(1);
-                                    if (line.contains("Title: ")) {
+                                    if(line.contains("Topic: ")) {
+                                        topic = information;
+                                    }else if (line.contains("Title: ")) {
                                         title = information;
                                     } else if (line.contains("Description: ")) {
                                         description = information;
@@ -281,8 +304,8 @@ public class PIM {
                                     }
                                 }
                             }
-                            PIR pir = new ToDoPIR(type, Integer.parseInt(id), title, description, deadline);
-                            pirList.add(pir);
+                        PIR pir = new ToDoPIR(type, Integer.parseInt(id), topic,title, description, deadline);
+                        pirList.add(pir);
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
@@ -296,6 +319,7 @@ public class PIM {
                     if (idMatcherD.matches()) {
                         String id = idMatcherD.group(1);
                         String type = "Event";
+                        String topic = null;
                         String title = null;
                         String description = null;
                         String date = null;
@@ -308,7 +332,9 @@ public class PIM {
                                 Matcher matcher = pattern.matcher(line);
                                 if (matcher.find()) {
                                     String information = matcher.group(1);
-                                    if (line.contains("Title: ")) {
+                                    if(line.contains("Topic: ")){
+                                        topic = information;
+                                    }else if (line.contains("Title: ")) {
                                         title = information;
                                     } else if (line.contains("Description: ")) {
                                         description = information;
@@ -321,7 +347,7 @@ public class PIM {
                                     }
                                 }
                             }
-                            PIR pir = new EventPIR(type, Integer.parseInt(id), title, description, date, startTime, endTime);
+                            PIR pir = new EventPIR(type, Integer.parseInt(id), topic,title, description, date, startTime, endTime);
                             pirList.add(pir);
                         } catch (IOException e) {
                             e.printStackTrace();
