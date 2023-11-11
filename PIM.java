@@ -13,7 +13,7 @@ public class PIM {
 
     List<PIR> pirList = new ArrayList<>();
     PIR pir;
-    static String path = "C:\\Users\\85255\\OneDrive - The Hong Kong Polytechnic University\\Documents\\java\\COMP3211\\PIM";  // for demonstration
+    static String path = "C:\\Users\\user\\Documents\\Java\\COMP3211\\PIM";  // for demonstration
 
     public PIM(){
         PIR pir;
@@ -122,7 +122,7 @@ public class PIM {
         System.out.println("===== Modify =====");
         System.out.println("There are "+getCountNo()+" PIRs");
         for(PIR pir:pirList){
-            System.out.println(fileCounter+"."+pir.type+"\t");
+
         }
     }
 
@@ -193,7 +193,7 @@ public class PIM {
         // Philbert's gf Part?
         // enter "I give up" to earn 3 pts
         // ask user to enter path and filename then save it to the file
-
+        
     }
 
     public void initial() throws IOException {
