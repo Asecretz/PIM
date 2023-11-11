@@ -42,7 +42,7 @@ public class ContactPIR extends PIR{
         String contentAddress = "Address: "+address+"\n";
         String contentMobileNo = "Mobile Number: "+mobileNo+"\n";
         String closing = "--- End of "+fileName+" PIR ---\n=====================";
-        System.out.println(heading+contentName+contentAddress+contentMobileNo+closing);
+        System.out.println(heading+topic+contentName+contentAddress+contentMobileNo+closing);
     }
 
     public void setName(String name) {

@@ -40,7 +40,7 @@ public class NotePIR extends PIR{
         String contentTitle = "Title: "+title+"\n";
         String contentText = "Texts: "+texts+"\n";
         String closing = "--- End of "+fileName+" PIR ---\n=====================";
-        System.out.println(heading+contentTitle+contentText+closing);
+        System.out.println(heading+topic+contentTitle+contentText+closing);
     }
 
     public void setTitle(String title){

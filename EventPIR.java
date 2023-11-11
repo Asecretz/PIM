@@ -52,7 +52,7 @@ public class EventPIR extends PIR{
         String contentStartTime = "Start Time: "+startTime+"\n";
         String contentEndTime = "End Time: "+endTime+"\n";
         String closing = "--- End of "+fileName+" PIR ---\n=====================";
-        System.out.println(heading+contentTitle+contentDescription+contentDate+contentStartTime+contentEndTime+closing);
+        System.out.println(heading+topic+contentTitle+contentDescription+contentDate+contentStartTime+contentEndTime+closing);
     }
 
     public void setTitle(String title){

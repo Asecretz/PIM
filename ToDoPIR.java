@@ -42,7 +42,7 @@ public class ToDoPIR extends PIR{
         String contentDescription = "Description: "+description+"\n";
         String contentDeadline = "Deadline: "+deadline+"\n";
         String closing = "--- End of "+fileName+" PIR ---\n=====================";
-        System.out.println(heading+contentTitle+contentDescription+contentDeadline+closing);
+        System.out.println(heading+topic+contentTitle+contentDescription+contentDeadline+closing);
     }
 
     public void setTitle(String title){

@@ -13,7 +13,7 @@ public class PIM {
 
     List<PIR> pirList = new ArrayList<>();
     PIR pir;
-    static String path = "C:\\Users\\user\\Documents\\Java\\COMP3211\\PIM";  // for demonstration
+    static String path = "C:\\Users\\user\\Documents\\Java\\COMP3211\\PIM";  // path
 
     public PIM(){
         PIR pir;
@@ -58,7 +58,7 @@ public class PIM {
         if(input == 1){
             String type = "Contact";
             int id = getCountNo();
-            System.out.print("Please enter the topic of the PIR");
+            System.out.print("Please enter the topic of the ContactPIR: ");
             String topic = sc.nextLine();
             System.out.print("Please enter the name of contact: ");
             String name = sc.nextLine();
@@ -72,7 +72,7 @@ public class PIM {
         } else if(input == 2){
             String type = "Note";
             int id = getCountNo();
-            System.out.print("Please enter the topic of the PIR");
+            System.out.print("Please enter the topic of the NotePIR: ");
             String topic = sc.nextLine();
             System.out.print("Please enter the title of note: ");
             String title = sc.nextLine();
@@ -84,7 +84,7 @@ public class PIM {
         } else if(input == 3){
             String type = "todo";
             int id = getCountNo();
-            System.out.print("Please enter the topic of the PIR");
+            System.out.print("Please enter the topic of the TodoPIR: ");
             String topic = sc.nextLine();
             System.out.print("Please enter the title of to-do: ");
             String title = sc.nextLine();
@@ -98,7 +98,7 @@ public class PIM {
         } else if(input == 4){
             String type = "Event";
             int id = getCountNo();
-            System.out.print("Please enter the topic of the PIR");
+            System.out.print("Please enter the topic of the EventPIR: ");
             String topic = sc.nextLine();
             System.out.print("Please enter the title of event: ");
             String title = sc.nextLine();
@@ -122,7 +122,272 @@ public class PIM {
         System.out.println("===== Modify =====");
         System.out.println("There are "+getCountNo()+" PIRs");
         for(PIR pir:pirList){
-
+            System.out.println(fileCounter+". "+pir.topic);
+            fileCounter++;
+        }
+        System.out.print("Please enter which PIR you want to modify: ");
+        int input = sc.nextInt();
+        sc.nextLine();
+        PIR pir = pirList.get(input-1);
+        if(pir.type.equals("Contact")){
+            // Contact Part
+            ContactPIR contactPIR = (ContactPIR) pir;
+            System.out.print("1. Topic\n2. Name\n3. Address\n4. Mobile number\nPlease enter a number: ");
+            int choice = sc.nextInt();
+            sc.nextLine();
+            if(choice == 1){
+                // Topic modify
+                System.out.println("This is you current topic: "+contactPIR.topic);
+                System.out.print("Please enter your new topic: ");
+                contactPIR.topic = sc.nextLine();
+                File fileToDelete = new File("C:\\Users\\user\\Documents\\Java\\COMP3211\\PIM\\"+"A"+contactPIR.id+".pim"); // path
+                if(fileToDelete.delete()){
+                    contactPIR.store();
+                    pirList.remove(input-1);
+                    pirList.add(contactPIR);
+                } else{
+                    System.out.println("=== Modify function occur error ===");
+                }
+            } else if(choice == 2){
+                // Name modify
+                System.out.println("This is you current name: "+contactPIR.getName());
+                System.out.print("Please enter your new name: ");
+                contactPIR.setName(sc.nextLine());
+                File fileToDelete = new File("C:\\Users\\user\\Documents\\Java\\COMP3211\\PIM\\"+"A"+contactPIR.id+".pim"); // path
+                if(fileToDelete.delete()){
+                    contactPIR.store();
+                    pirList.remove(input-1);
+                    pirList.add(contactPIR);
+                } else{
+                    System.out.println("=== Modify function occur error ===");
+                }
+            } else if(choice == 3){
+                // Address modify
+                System.out.println("This is you current address: "+contactPIR.getAddress());
+                System.out.print("Please enter your new address: ");
+                contactPIR.setAddress(sc.nextLine());
+                File fileToDelete = new File("C:\\Users\\user\\Documents\\Java\\COMP3211\\PIM\\"+"A"+contactPIR.id+".pim"); // path
+                if(fileToDelete.delete()){
+                    contactPIR.store();
+                    pirList.remove(input-1);
+                    pirList.add(contactPIR);
+                } else{
+                    System.out.println("=== Modify function occur error ===");
+                }
+            } else if(choice == 4){
+                // Mobile Number modify
+                System.out.println("This is you current mobile number: "+contactPIR.getMobileNo());
+                System.out.print("Please enter your new mobile number: ");
+                contactPIR.setMobileNo(sc.nextLine());
+                File fileToDelete = new File("C:\\Users\\user\\Documents\\Java\\COMP3211\\PIM\\"+"A"+contactPIR.id+".pim"); // path
+                if(fileToDelete.delete()){
+                    contactPIR.store();
+                    pirList.remove(input-1);
+                    pirList.add(contactPIR);
+                } else{
+                    System.out.println("=== Modify function occur error ===");
+                }
+            } else{
+                System.out.println("===== Wrong Input ======");
+            }
+        } else if(pir.type.equals("Note")){
+            // Note Part
+            NotePIR notePIR = (NotePIR) pir;
+            System.out.print("1. Topic\n2. Title\n3. texts\nPlease enter a number: ");
+            int choice = sc.nextInt();
+            sc.nextLine();
+            if(choice == 1) {
+                // Topic modify
+                System.out.println("This is you current topic: " + notePIR.topic);
+                System.out.print("Please enter your new topic: ");
+                notePIR.topic = sc.nextLine();
+                File fileToDelete = new File("C:\\Users\\user\\Documents\\Java\\COMP3211\\PIM\\" + "B" + notePIR.id + ".pim"); // path
+                if (fileToDelete.delete()) {
+                    notePIR.store();
+                    pirList.remove(input-1);
+                    pirList.add(notePIR);
+                } else {
+                    System.out.println("=== Modify function occur error ===");
+                }
+            } else if(choice == 2){
+                // Title modify
+                System.out.println("This is you current title: " + notePIR.getTitle());
+                System.out.print("Please enter your new title: ");
+                notePIR.setTitle(sc.nextLine());
+                File fileToDelete = new File("C:\\Users\\user\\Documents\\Java\\COMP3211\\PIM\\" + "B" + notePIR.getTitle() + ".pim"); // path
+                if (fileToDelete.delete()) {
+                    notePIR.store();
+                    pirList.remove(input-1);
+                    pirList.add(notePIR);
+                } else {
+                    System.out.println("=== Modify function occur error ===");
+                }
+            } else if(choice == 3) {
+                // Title modify
+                System.out.println("This is you current texts: " + notePIR.getTexts());
+                System.out.print("Please enter your new texts: ");
+                notePIR.setTexts(sc.nextLine());
+                File fileToDelete = new File("C:\\Users\\user\\Documents\\Java\\COMP3211\\PIM\\" + "B" + notePIR.getTexts() + ".pim"); // path
+                if (fileToDelete.delete()) {
+                    notePIR.store();
+                    pirList.remove(input-1);
+                    pirList.add(notePIR);
+                } else {
+                    System.out.println("=== Modify function occur error ===");
+                }
+            } else{
+                System.out.println("===== Wrong Input ======");
+            }
+        } else if(pir.type.equals("Todo")){
+            // Todo Part
+            ToDoPIR toDoPIR = (ToDoPIR) pir;
+            System.out.print("1. Topic\n2. Title\n3. Description\n4. Deadline\nPlease enter a number: ");
+            int choice = sc.nextInt();
+            sc.nextLine();
+            if(choice == 1) {
+                // Topic modify
+                System.out.println("This is you current topic: " + toDoPIR.topic);
+                System.out.print("Please enter your new topic: ");
+                toDoPIR.topic = sc.nextLine();
+                File fileToDelete = new File("C:\\Users\\user\\Documents\\Java\\COMP3211\\PIM\\" + "C" + toDoPIR.id + ".pim"); // path
+                if (fileToDelete.delete()) {
+                    toDoPIR.store();
+                    pirList.remove(input-1);
+                    pirList.add(toDoPIR);
+                } else {
+                    System.out.println("=== Modify function occur error ===");
+                }
+            } else if(choice == 2){
+                // Title modify
+                System.out.println("This is you current title: " + toDoPIR.getTitle());
+                System.out.print("Please enter your new title: ");
+                toDoPIR.setTitle(sc.nextLine());
+                File fileToDelete = new File("C:\\Users\\user\\Documents\\Java\\COMP3211\\PIM\\" + "C" + toDoPIR.id + ".pim"); // path
+                if (fileToDelete.delete()) {
+                    toDoPIR.store();
+                    pirList.remove(input-1);
+                    pirList.add(toDoPIR);
+                } else {
+                    System.out.println("=== Modify function occur error ===");
+                }
+            } else if(choice == 3){
+                // Description modify
+                System.out.println("This is you current description: " + toDoPIR.getDescription());
+                System.out.print("Please enter your new description: ");
+                toDoPIR.setDescription(sc.nextLine());
+                File fileToDelete = new File("C:\\Users\\user\\Documents\\Java\\COMP3211\\PIM\\" + "C" + toDoPIR.id + ".pim"); // path
+                if (fileToDelete.delete()) {
+                    toDoPIR.store();
+                    pirList.remove(input-1);
+                    pirList.add(toDoPIR);
+                } else {
+                    System.out.println("=== Modify function occur error ===");
+                }
+            } else if(choice == 4){
+                // Deadline modify
+                System.out.println("This is you current deadline: " + toDoPIR.getDeadline());
+                System.out.print("Please enter your new deadline: ");
+                toDoPIR.setDeadline(sc.nextLine());
+                File fileToDelete = new File("C:\\Users\\user\\Documents\\Java\\COMP3211\\PIM\\" + "C" + toDoPIR.id + ".pim"); // path
+                if (fileToDelete.delete()) {
+                    toDoPIR.store();
+                    pirList.remove(input-1);
+                    pirList.add(toDoPIR);
+                } else {
+                    System.out.println("=== Modify function occur error ===");
+                }
+            } else{
+                System.out.println("===== Wrong Input ======");
+            }
+        } else if(pir.type.equals("Event")){
+            // Event Part
+            EventPIR eventPIR = (EventPIR) pir;
+            System.out.print("1. Topic\n2. Title\n3. Description\n4. Date\n5. Start Time\n6. End Time\nPlease enter a number: ");
+            int choice = sc.nextInt();
+            sc.nextLine();
+            if(choice == 1) {
+                // Topic modify
+                System.out.println("This is you current topic: " + eventPIR.topic);
+                System.out.print("Please enter your new topic: ");
+                eventPIR.topic = sc.nextLine();
+                File fileToDelete = new File("C:\\Users\\user\\Documents\\Java\\COMP3211\\PIM\\" + "D" + eventPIR.id + ".pim"); // path
+                if (fileToDelete.delete()) {
+                    eventPIR.store();
+                    pirList.remove(input-1);
+                    pirList.add(eventPIR);
+                } else {
+                    System.out.println("=== Modify function occur error ===");
+                }
+            } else if(choice == 2) {
+                // Title modify
+                System.out.println("This is you current Title: " + eventPIR.getTitle());
+                System.out.print("Please enter your new Title: ");
+                eventPIR.setTitle(sc.nextLine());
+                File fileToDelete = new File("C:\\Users\\user\\Documents\\Java\\COMP3211\\PIM\\" + "D" + eventPIR.id + ".pim"); // path
+                if (fileToDelete.delete()) {
+                    eventPIR.store();
+                    pirList.remove(input-1);
+                    pirList.add(eventPIR);
+                } else {
+                    System.out.println("=== Modify function occur error ===");
+                }
+            } else if(choice == 3) {
+                // Description modify
+                System.out.println("This is you current Description: " + eventPIR.getDescription());
+                System.out.print("Please enter your new Description: ");
+                eventPIR.setDescription(sc.nextLine());
+                File fileToDelete = new File("C:\\Users\\user\\Documents\\Java\\COMP3211\\PIM\\" + "D" + eventPIR.id + ".pim"); // path
+                if (fileToDelete.delete()) {
+                    eventPIR.store();
+                    pirList.remove(input - 1);
+                    pirList.add(eventPIR);
+                } else {
+                    System.out.println("=== Modify function occur error ===");
+                }
+            } else if(choice == 4) {
+                // Date modify
+                System.out.println("This is you current Date: " + eventPIR.getDate());
+                System.out.print("Please enter your new Date (DD-MM-YY): ");
+                eventPIR.setDate(sc.nextLine());
+                File fileToDelete = new File("C:\\Users\\user\\Documents\\Java\\COMP3211\\PIM\\" + "D" + eventPIR.id + ".pim"); // path
+                if (fileToDelete.delete()) {
+                    eventPIR.store();
+                    pirList.remove(input - 1);
+                    pirList.add(eventPIR);
+                } else {
+                    System.out.println("=== Modify function occur error ===");
+                }
+            } else if(choice == 5) {
+                // Start Time modify
+                System.out.println("This is you current Start Time: " + eventPIR.getStartTime());
+                System.out.print("Please enter your new Start Time (DD-MM-YY): ");
+                eventPIR.setStartTime(sc.nextLine());
+                File fileToDelete = new File("C:\\Users\\user\\Documents\\Java\\COMP3211\\PIM\\" + "D" + eventPIR.id + ".pim"); // path
+                if (fileToDelete.delete()) {
+                    eventPIR.store();
+                    pirList.remove(input - 1);
+                    pirList.add(eventPIR);
+                } else {
+                    System.out.println("=== Modify function occur error ===");
+                }
+            } else if(choice == 6) {
+                // End Time modify
+                System.out.println("This is you current End Time: " + eventPIR.getEndTime());
+                System.out.print("Please enter your new End Time (DD-MM-YY): ");
+                eventPIR.setEndTime(sc.nextLine());
+                File fileToDelete = new File("C:\\Users\\user\\Documents\\Java\\COMP3211\\PIM\\" + "D" + eventPIR.id + ".pim"); // path
+                if (fileToDelete.delete()) {
+                    eventPIR.store();
+                    pirList.remove(input - 1);
+                    pirList.add(eventPIR);
+                } else {
+                    System.out.println("=== Modify function occur error ===");
+                }
+            } else {
+                System.out.println("===== Wrong Input ======");
+            }
+        } else {
+            System.out.println("===== Wrong Input ======");
         }
     }
 
@@ -201,10 +466,8 @@ public class PIM {
         if (directory.exists() && directory.isDirectory()) {
             File[] files = directory.listFiles();
             for (File file : files) {
-                System.out.println("For loop"); // test
                 if (file.getName().contains("A")) {
                     // Create ContactPIR
-                    System.out.println("A loop"); // test
                     String fileNameA = file.getName();
                     Pattern idPatternA = Pattern.compile("[A-Za-z]*(\\d+).*");
                     Matcher idMatcherA = idPatternA.matcher(fileNameA);
@@ -241,7 +504,6 @@ public class PIM {
                     }
                 } else if (file.getName().contains("B")) {
                     // Create NotePIR
-                    System.out.println("B loop"); // test
                     String fileNameB = file.getName();
                     Pattern idPatternB = Pattern.compile("[A-Za-z]*(\\d+).*");
                     Matcher idMatcherB = idPatternB.matcher(fileNameB);
@@ -275,7 +537,6 @@ public class PIM {
                     }
                 } else if (file.getName().contains("C")) {
                     // Create ToDoPIR
-                    System.out.println("C loop"); // test
                     String fileNameC = file.getName();
                     Pattern idPatternC = Pattern.compile("[A-Za-z]*(\\d+).*");
                     Matcher idMatcherC = idPatternC.matcher(fileNameC);
@@ -312,7 +573,6 @@ public class PIM {
                     }
                 } else if (file.getName().contains("D")) {
                     // Create EventPIR
-                    System.out.println("D loop"); // test
                     String fileNameD = file.getName();
                     Pattern idPatternD = Pattern.compile("[A-Za-z]*(\\d+).*");
                     Matcher idMatcherD = idPatternD.matcher(fileNameD);
