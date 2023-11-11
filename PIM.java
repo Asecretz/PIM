@@ -12,7 +12,7 @@ public class PIM {
 
     List<PIR> pirList = new ArrayList<>();
     PIR pir;
-    static String path = "C:\\Users\\85255\\OneDrive - The Hong Kong Polytechnic University\\Documents\\java\\COMP3211";  // for demonstration
+    static String path = "C:\\Users\\85255\\OneDrive - The Hong Kong Polytechnic University\\Documents\\java\\COMP3211\\PIM";  // for demonstration
 
     public PIM(){
         PIR pir;
