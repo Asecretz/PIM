@@ -32,4 +32,14 @@ public class ContactPIR extends PIR{
             e.printStackTrace();
         }
     }
+
+    void print(){
+        String fileName = "A"+id+".pim";
+        String heading = "=== Contact ===\n";
+        String contentName = "Name: "+name+"\n";
+        String contentAddress = "Address: "+address+"\n";
+        String contentMobileNo = "Mobile Number: "+mobileNo+"\n";
+        String closing = "--- End of "+fileName+" PIR ---\n=====================";
+        System.out.println(heading+contentName+contentAddress+contentMobileNo+closing);
+    }
 }

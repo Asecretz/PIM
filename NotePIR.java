@@ -31,4 +31,13 @@ public class NotePIR extends PIR{
         }
 
     }
+
+    void print(){
+        String fileName = "B"+id+".pim";
+        String heading = "=== Note ===\n";
+        String contentTitle = "Title: "+title+"\n";
+        String contentText = "Texts: "+texts+"\n";
+        String closing = "--- End of "+fileName+" PIR ---\n=====================";
+        System.out.println(heading+contentTitle+contentText+closing);
+    }
 }

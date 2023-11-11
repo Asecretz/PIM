@@ -12,7 +12,7 @@ public class PIM {
 
     List<PIR> pirList = new ArrayList<>();
     PIR pir;
-    static String path = "C:/Users/user/Documents/Java/COMP3211/PIM";  // for demonstration
+    static String path = "C:\\Users\\85255\\OneDrive - The Hong Kong Polytechnic University\\Documents\\java\\COMP3211";  // for demonstration
 
     public PIM(){
         PIR pir;
@@ -50,6 +50,7 @@ public class PIM {
 
     public void create(){
         Scanner sc = new Scanner(System.in);
+        System.out.println("===== Create =====");
         System.out.print("Which type of PIR you want to create?\n1.Contact\n2.Note\n3.To-do\n4.Event\nEnter a number: ");
         int input = sc.nextInt();
         sc.nextLine();
@@ -133,7 +134,40 @@ public class PIM {
     }
 
     public void print(){
-
+        Scanner sc = new Scanner(System.in);
+        System.out.println("===== Print =====");
+        System.out.print("1.Contact\n2.Note\n3.To-do\n4.Event\n5.All\nPlease enter a number: ");
+        int input = sc.nextInt();
+        sc.nextLine();
+        if(input == 1){
+            for(PIR pir: pirList){
+                if(pir.type.equals("Contact")){
+                    pir.print();
+                }
+            }
+        } else if(input == 2){
+            for(PIR pir:pirList){
+                if(pir.type.equals("Note")){
+                    pir.print();
+                }
+            }
+        } else if(input == 3){
+            for(PIR pir:pirList){
+                if(pir.type.equals("Todo")){
+                    pir.print();
+                }
+            }
+        } else if(input == 4){
+            for(PIR pir:pirList){
+                if(pir.type.equals("Event")){
+                    pir.print();
+                }
+            }
+        } else if(input == 5){
+            for(PIR pir:pirList){
+                pir.print();
+            }
+        }
     }
 
     public void delete(){
@@ -153,8 +187,10 @@ public class PIM {
         if (directory.exists() && directory.isDirectory()) {
             File[] files = directory.listFiles();
             for (File file : files) {
+                System.out.println("For loop"); // test
                 if (file.getName().contains("A")) {
                     // Create ContactPIR
+                    System.out.println("A loop"); // test
                     String fileNameA = file.getName();
                     Pattern idPatternA = Pattern.compile("[A-Za-z]*(\\d+).*");
                     Matcher idMatcherA = idPatternA.matcher(fileNameA);
@@ -186,71 +222,74 @@ public class PIM {
                             e.printStackTrace();
                         }
                     }
-                    } else if (file.getName().contains("B")) {
-                        // Create NotePIR
-                        String fileNameB = file.getName();
-                        Pattern idPatternB = Pattern.compile("[A-Za-z]*(\\d+).*");
-                        Matcher idMatcherB = idPatternB.matcher(fileNameB);
-                        if (idMatcherB.matches()) {
-                            String id = idMatcherB.group(1);
-                            String type = "Note";
-                            String title = null;
-                            String text = null;
-                            Pattern pattern = Pattern.compile(":\\s*(.*)");
-                            try (BufferedReader br = new BufferedReader(new FileReader((file)))) {
-                                String line;
-                                while ((line = br.readLine()) != null) {
-                                    Matcher matcher = pattern.matcher(line);
-                                    if (matcher.find()) {
-                                        String information = matcher.group(1);
-                                        if (line.contains("Title: ")) {
-                                            title = information;
-                                        } else if (line.contains("Texts: ")) {
-                                            text = information;
-                                        }
+                } else if (file.getName().contains("B")) {
+                    // Create NotePIR
+                    System.out.println("B loop"); // test
+                    String fileNameB = file.getName();
+                    Pattern idPatternB = Pattern.compile("[A-Za-z]*(\\d+).*");
+                    Matcher idMatcherB = idPatternB.matcher(fileNameB);
+                    if (idMatcherB.matches()) {
+                        String id = idMatcherB.group(1);
+                        String type = "Note";
+                        String title = null;
+                        String text = null;
+                        Pattern pattern = Pattern.compile(":\\s*(.*)");
+                        try (BufferedReader br = new BufferedReader(new FileReader((file)))) {
+                            String line;
+                            while ((line = br.readLine()) != null) {
+                                Matcher matcher = pattern.matcher(line);
+                                if (matcher.find()) {
+                                    String information = matcher.group(1);
+                                    if (line.contains("Title: ")) {
+                                        title = information;
+                                    } else if (line.contains("Texts: ")) {
+                                        text = information;
                                     }
                                 }
-                                PIR pir = new NotePIR(type, Integer.parseInt(id), title, text);
-                                pirList.add(pir);
-                            } catch (IOException e) {
-                                e.printStackTrace();
                             }
+                            PIR pir = new NotePIR(type, Integer.parseInt(id), title, text);
+                            pirList.add(pir);
+                        } catch (IOException e) {
+                            e.printStackTrace();
                         }
-                    } else if (file.getName().contains("C")) {
-                        // Create ToDoPIR
-                        String fileNameC = file.getName();
-                        Pattern idPatternC = Pattern.compile("[A-Za-z]*(\\d+).*");
-                        Matcher idMatcherC = idPatternC.matcher(fileNameC);
-                        if (idMatcherC.matches()) {
-                            String id = idMatcherC.group(1);
-                            String type = "ToDo";
-                            String title = null;
-                            String description = null;
-                            String deadline = null;
-                            Pattern pattern = Pattern.compile(":\\s*(.*)");
-                            try (BufferedReader br = new BufferedReader(new FileReader((file)))) {
-                                String line;
-                                while ((line = br.readLine()) != null) {
-                                    Matcher matcher = pattern.matcher(line);
-                                    if (matcher.find()) {
-                                        String information = matcher.group(1);
-                                        if (line.contains("Title: ")) {
-                                            title = information;
-                                        } else if (line.contains("Description: ")) {
-                                            description = information;
-                                        } else if (line.contains("Deadline:")) {
-                                            deadline = information;
-                                        }
+                    }
+                } else if (file.getName().contains("C")) {
+                    // Create ToDoPIR
+                    System.out.println("C loop"); // test
+                    String fileNameC = file.getName();
+                    Pattern idPatternC = Pattern.compile("[A-Za-z]*(\\d+).*");
+                    Matcher idMatcherC = idPatternC.matcher(fileNameC);
+                    if (idMatcherC.matches()) {
+                        String id = idMatcherC.group(1);
+                        String type = "ToDo";
+                        String title = null;
+                        String description = null;
+                        String deadline = null;
+                        Pattern pattern = Pattern.compile(":\\s*(.*)");
+                        try (BufferedReader br = new BufferedReader(new FileReader((file)))) {
+                            String line;
+                            while ((line = br.readLine()) != null) {
+                                Matcher matcher = pattern.matcher(line);
+                                if (matcher.find()) {
+                                    String information = matcher.group(1);
+                                    if (line.contains("Title: ")) {
+                                        title = information;
+                                    } else if (line.contains("Description: ")) {
+                                        description = information;
+                                    } else if (line.contains("Deadline:")) {
+                                        deadline = information;
                                     }
                                 }
-                                PIR pir = new ToDoPIR(type, Integer.parseInt(id), title, description, deadline);
-                                pirList.add(pir);
-                            } catch (IOException e) {
-                                e.printStackTrace();
                             }
+                            PIR pir = new ToDoPIR(type, Integer.parseInt(id), title, description, deadline);
+                            pirList.add(pir);
+                        } catch (IOException e) {
+                            e.printStackTrace();
                         }
+                    }
                 } else if (file.getName().contains("D")) {
                     // Create EventPIR
+                    System.out.println("D loop"); // test
                     String fileNameD = file.getName();
                     Pattern idPatternD = Pattern.compile("[A-Za-z]*(\\d+).*");
                     Matcher idMatcherD = idPatternD.matcher(fileNameD);

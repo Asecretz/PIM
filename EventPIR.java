@@ -40,4 +40,16 @@ public class EventPIR extends PIR{
             e.printStackTrace();
         }
     }
+
+    void print(){
+        String fileName = "D"+id+".pim";
+        String heading = "=== Event ===\n";
+        String contentTitle = "Title: "+title+"\n";
+        String contentDescription = "Description: "+description+"\n";
+        String contentDate = "Date: "+date+"\n";
+        String contentStartTime = "Start Time: "+startTime+"\n";
+        String contentEndTime = "End Time: "+endTime+"\n";
+        String closing = "--- End of "+fileName+" PIR ---\n=====================";
+        System.out.println(heading+contentTitle+contentDescription+contentDate+contentStartTime+contentEndTime+closing);
+    }
 }

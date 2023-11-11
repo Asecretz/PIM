@@ -32,4 +32,14 @@ public class ToDoPIR extends PIR{
             e.printStackTrace();
         }
     }
+
+    void print(){
+        String fileName = "C"+id+".pim";
+        String heading = "=== To-do ===\n";
+        String contentTitle = "Title: "+title+"\n";
+        String contentDescription = "Description: "+description+"\n";
+        String contentDeadline = "Deadline: "+deadline+"\n";
+        String closing = "--- End of "+fileName+" PIR ---\n=====================";
+        System.out.println(heading+contentTitle+contentDescription+contentDeadline+closing);
+    }
 }
