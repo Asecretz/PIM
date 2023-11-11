@@ -392,24 +392,7 @@ public class PIM {
     }
 
     public void search(){
-        // ___ Part
-        // take it as reference
-        /*public class FileSearchExample {
-            public static void main(String[] args) {
-                File file = new File("path/to/file.txt");
-                try {
-                    Scanner scanner = new Scanner(file);
-                    while (scanner.hasNextLine()) {
-                        String line = scanner.nextLine();
-                        if (line.contains("searchWord")) {
-                            System.out.println("Found the word: " + line);
-                        }
-                    }
-                    scanner.close();
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                }
-            }*/
+
     }
 
     public void print(){
@@ -450,15 +433,201 @@ public class PIM {
     }
 
     public void delete(){
-        // ___ Part
-        // delete file easy part
+        Scanner sc = new Scanner(System.in);
+        int fileCounter = 1;
+        System.out.println("===== Delete =====");
+        System.out.println("There are "+getCountNo()+" PIRs");
+        for(PIR pir:pirList){
+            System.out.println(fileCounter+". "+pir.topic);
+            fileCounter++;
+        }
+        System.out.print("Please enter which PIR you want to delete: ");
+        int input = sc.nextInt();
+        sc.nextLine();
+        PIR pir = pirList.get(input-1);
+        String type = null;
+        if(pir.type.equals("Contact")){
+            type = "A";
+        } else if(pir.type.equals("Note")){
+            type = "B";
+        } else if(pir.type.equals("Todo")){
+            type = "C";
+        } else if(pir.type.equals("Event")){
+            type = "D";
+        } else {
+            System.out.println("=== Delete function occur error ===");
+        }
+        File fileToDelete = new File("C:\\Users\\user\\Documents\\Java\\COMP3211\\PIM\\" + type + pir.id + ".pim"); // path
+        if (fileToDelete.delete()) {
+            pirList.remove(input - 1);
+            System.out.println("=== Delete Successfully ===");
+        } else {
+            System.out.println("=== Delete function occur error ===");
+        }
     }
 
     public void load(){
-        // Philbert's gf Part?
+        // Philbert's gf Part
         // enter "I give up" to earn 3 pts
-        // ask user to enter path and filename then save it to the file
-        
+        Scanner sc = new Scanner(System.in);
+        System.out.println("===== Load =====");
+        System.out.print("Please enter the path of PIM file: ");
+        String pimPath = sc.nextLine();
+        File file = new File(pimPath);
+        if (file.getName().contains("A")) {
+            // Create ContactPIR
+            String fileNameA = file.getName();
+            Pattern idPatternA = Pattern.compile("[A-Za-z]*(\\d+).*");
+            Matcher idMatcherA = idPatternA.matcher(fileNameA);
+            if (idMatcherA.matches()) {
+                String id = idMatcherA.group(1);
+                String type = "Contact";
+                String topic = null;
+                String name = null;
+                String address = null;
+                String mobileNo = null;
+                Pattern pattern = Pattern.compile(":\\s*(.*)");
+                try (BufferedReader br = new BufferedReader(new FileReader((file)))) {
+                    String line;
+                    while ((line = br.readLine()) != null) {
+                        Matcher matcher = pattern.matcher(line);
+                        if (matcher.find()) {
+                            String information = matcher.group(1);
+                            if(line.contains("Topic: ")){
+                                topic = information;
+                            } else if (line.contains("Name: ")) {
+                                name = information;
+                            } else if (line.contains("Address: ")) {
+                                address = information;
+                            } else if (line.contains("Mobile Number: ")) {
+                                mobileNo = information;
+                            }
+                        }
+                    }
+                    PIR pir = new ContactPIR(type, Integer.parseInt(id), topic, name, address, mobileNo);
+                    pir.store();
+                    pirList.add(pir);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        } else if (file.getName().contains("B")) {
+            // Create NotePIR
+            String fileNameB = file.getName();
+            Pattern idPatternB = Pattern.compile("[A-Za-z]*(\\d+).*");
+            Matcher idMatcherB = idPatternB.matcher(fileNameB);
+            if (idMatcherB.matches()) {
+                String id = idMatcherB.group(1);
+                String type = "Note";
+                String topic = null;
+                String title = null;
+                String text = null;
+                Pattern pattern = Pattern.compile(":\\s*(.*)");
+                try (BufferedReader br = new BufferedReader(new FileReader((file)))) {
+                    String line;
+                    while ((line = br.readLine()) != null) {
+                        Matcher matcher = pattern.matcher(line);
+                        if (matcher.find()) {
+                            String information = matcher.group(1);
+                            if(line.contains("Topic: ")){
+                                topic = information;
+                            }else if (line.contains("Title: ")) {
+                                title = information;
+                            } else if (line.contains("Texts: ")) {
+                                text = information;
+                            }
+                        }
+                    }
+                    PIR pir = new NotePIR(type, Integer.parseInt(id), topic, title, text);
+                    pir.store();
+                    pirList.add(pir);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        } else if (file.getName().contains("C")) {
+            // Create ToDoPIR
+            String fileNameC = file.getName();
+            Pattern idPatternC = Pattern.compile("[A-Za-z]*(\\d+).*");
+            Matcher idMatcherC = idPatternC.matcher(fileNameC);
+            if (idMatcherC.matches()) {
+                String id = idMatcherC.group(1);
+                String type = "ToDo";
+                String topic = null;
+                String title = null;
+                String description = null;
+                String deadline = null;
+                Pattern pattern = Pattern.compile(":\\s*(.*)");
+                try (BufferedReader br = new BufferedReader(new FileReader((file)))) {
+                    String line;
+                    while ((line = br.readLine()) != null) {
+                        Matcher matcher = pattern.matcher(line);
+                        if (matcher.find()) {
+                            String information = matcher.group(1);
+                            if(line.contains("Topic: ")) {
+                                topic = information;
+                            }else if (line.contains("Title: ")) {
+                                title = information;
+                            } else if (line.contains("Description: ")) {
+                                description = information;
+                            } else if (line.contains("Deadline:")) {
+                                deadline = information;
+                            }
+                        }
+                    }
+                    PIR pir = new ToDoPIR(type, Integer.parseInt(id), topic,title, description, deadline);
+                    pir.store();
+                    pirList.add(pir);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        } else if (file.getName().contains("D")) {
+            // Create EventPIR
+            String fileNameD = file.getName();
+            Pattern idPatternD = Pattern.compile("[A-Za-z]*(\\d+).*");
+            Matcher idMatcherD = idPatternD.matcher(fileNameD);
+            if (idMatcherD.matches()) {
+                String id = idMatcherD.group(1);
+                String type = "Event";
+                String topic = null;
+                String title = null;
+                String description = null;
+                String date = null;
+                String startTime = null;
+                String endTime = null;
+                Pattern pattern = Pattern.compile(":\\s*(.*)");
+                try (BufferedReader br = new BufferedReader(new FileReader((file)))) {
+                    String line;
+                    while ((line = br.readLine()) != null) {
+                        Matcher matcher = pattern.matcher(line);
+                        if (matcher.find()) {
+                            String information = matcher.group(1);
+                            if(line.contains("Topic: ")){
+                                topic = information;
+                            }else if (line.contains("Title: ")) {
+                                title = information;
+                            } else if (line.contains("Description: ")) {
+                                description = information;
+                            } else if (line.contains("Date: ")) {
+                                date = information;
+                            } else if (line.contains("Start Time: ")) {
+                                startTime = information;
+                            } else if (line.contains("End Time: ")) {
+                                endTime = information;
+                            }
+                        }
+                    }
+                    PIR pir = new EventPIR(type, Integer.parseInt(id), topic,title, description, date, startTime, endTime);
+                    pir.store();
+                    pirList.add(pir);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            } else {
+                System.out.println("=== Wrong FileName Detected ===");
+            }
+        }
     }
 
     public void initial() throws IOException {
