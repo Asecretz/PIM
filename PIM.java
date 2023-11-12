@@ -7,7 +7,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import static java.lang.System.exit;
-import static java.lang.System.in;
 
 public class PIM {
 
@@ -90,9 +89,9 @@ public class PIM {
             String title = sc.nextLine();
             System.out.print("Please enter the description of to-do: ");
             String description = sc.nextLine();
-            System.out.print("Please enter the date (DD-MM-YY): ");
-            String date = sc.nextLine();
-            pir = new ToDoPIR(type,id,topic,title,description,date);
+            System.out.print("Please enter the deadline (DD-MM-YYYY hh-mm): ");
+            String deadline = sc.nextLine();
+            pir = new ToDoPIR(type,id,topic,title,description,deadline);
             pir.store();
             pirList.add(pir);
         } else if(input == 4){
@@ -104,7 +103,7 @@ public class PIM {
             String title = sc.nextLine();
             System.out.print("Please enter the description of event: ");
             String description = sc.nextLine();
-            System.out.print("Please enter the date of event (DD-MM-YY): ");
+            System.out.print("Please enter the date of event (DD-MM-YYYY): ");
             String date = sc.nextLine();
             System.out.print("Please enter the start time of the event (hh-mm): ");
             String startTime = sc.nextLine();
@@ -347,7 +346,7 @@ public class PIM {
             } else if(choice == 4) {
                 // Date modify
                 System.out.println("This is you current Date: " + eventPIR.getDate());
-                System.out.print("Please enter your new Date (DD-MM-YY): ");
+                System.out.print("Please enter your new Date (DD-MM-YYYY): ");
                 eventPIR.setDate(sc.nextLine());
                 File fileToDelete = new File("C:\\Users\\user\\Documents\\Java\\COMP3211\\PIM\\" + "D" + eventPIR.id + ".pim"); // path
                 if (fileToDelete.delete()) {
@@ -360,7 +359,7 @@ public class PIM {
             } else if(choice == 5) {
                 // Start Time modify
                 System.out.println("This is you current Start Time: " + eventPIR.getStartTime());
-                System.out.print("Please enter your new Start Time (DD-MM-YY): ");
+                System.out.print("Please enter your new Start Time (DD-MM-YYYY): ");
                 eventPIR.setStartTime(sc.nextLine());
                 File fileToDelete = new File("C:\\Users\\user\\Documents\\Java\\COMP3211\\PIM\\" + "D" + eventPIR.id + ".pim"); // path
                 if (fileToDelete.delete()) {
@@ -373,7 +372,7 @@ public class PIM {
             } else if(choice == 6) {
                 // End Time modify
                 System.out.println("This is you current End Time: " + eventPIR.getEndTime());
-                System.out.print("Please enter your new End Time (DD-MM-YY): ");
+                System.out.print("Please enter your new End Time (DD-MM-YYYY): ");
                 eventPIR.setEndTime(sc.nextLine());
                 File fileToDelete = new File("C:\\Users\\user\\Documents\\Java\\COMP3211\\PIM\\" + "D" + eventPIR.id + ".pim"); // path
                 if (fileToDelete.delete()) {
@@ -392,7 +391,138 @@ public class PIM {
     }
 
     public void search(){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("===== Search =====");
+        System.out.print("1. Search Text\n2. Check Time\nPlease enter a number: ");
+        int input = sc.nextInt();
+        sc.nextLine();
+        if(input == 1){
+            System.out.print("Please enter the text (you may search note text, description, a name, an address or a mobile number): ");
+            String searchText = sc.nextLine();
+            for (PIR pir : pirList){
+                if(pir.type.equals("Contact")){
+                    // Contact name and address
+                    ContactPIR contactPIR = (ContactPIR) pir;
+                    if(contactPIR.getAddress().contains(searchText) || contactPIR.getName().contains(searchText) || contactPIR.getMobileNo().contains(searchText)){
+                        pir.print();
+                    }
+                } else if(pir.type.equals("Note")){
+                    // Note text
+                    NotePIR notePIR = (NotePIR) pir;
+                    if(notePIR.getTexts().contains(searchText)){
+                        notePIR.print();
+                    }
+                } else if(pir.type.equals("Todo")){
+                    // Todo description
+                    ToDoPIR toDoPIR = (ToDoPIR) pir;
+                    if(toDoPIR.getDescription().contains(searchText)) {
+                        toDoPIR.print();
+                    }
+                } else if(pir.type.equals("Event")){
+                    // Event description
+                    EventPIR eventPIR = (EventPIR) pir;
+                    if(eventPIR.getDescription().contains(searchText)){
+                        eventPIR.print();
+                    }
+                }
+            }
+        } else if(input == 2){
+            // Three cases (1. Before Time , 2. After Time , 3. Within a Time)
+            // if the given time = time in PIR, it also counts.
+            System.out.print("1. Before a Point in Time\n2. After a Point in Time\n3. Duration of Time\nPlease enter a number: ");
+            int choice = sc.nextInt();
+            sc.nextLine();
+            List<PIR> matchingPIRs = new ArrayList<>();
+            if(choice == 1){
+                // Case 1
+                System.out.print("Please enter a Point in Time (DD-MM-YYYY hh-mm): ");
+                String inputTime = sc.nextLine();
+                DateHandler searchTime = new DateHandler(inputTime);
+                for(PIR pir : pirList){
+                    if(pir.type.equals("Todo")){
+                        ToDoPIR toDoPIR = (ToDoPIR) pir;
+                        DateHandler toDoTime = new DateHandler(toDoPIR.getDeadline());
+                        if(toDoTime.before(searchTime)){
+                            matchingPIRs.add(pir);
+                        }
+                    } else if(pir.type.equals("Event")){
+                        EventPIR eventPIR = (EventPIR) pir;
+                        DateHandler eventTime = new DateHandler(eventPIR.date,eventPIR.startTime);
+                        if(eventTime.before(searchTime)){
+                            matchingPIRs.add(pir);
+                        }
+                    }
+                }
+                System.out.println("====================");
+                System.out.println("There are "+matchingPIRs.size()+" PIRs before "+inputTime);
+                for(PIR pir : matchingPIRs){
+                    int counter = 1;
+                    System.out.println(counter+". "+pir.topic);
+                    counter++;
+                }
+                System.out.println("====================");
 
+            } else if(choice == 2){
+                // Case 2
+                System.out.print("Please enter a Point in Time (DD-MM-YYYY hh-mm): ");
+                String inputTime = sc.nextLine();
+                DateHandler searchTime = new DateHandler(inputTime);
+                for(PIR pir : pirList){
+                    if(pir.type.equals("Todo")){
+                        ToDoPIR toDoPIR = (ToDoPIR) pir;
+                        DateHandler toDoTime = new DateHandler(toDoPIR.getDeadline());
+                        if(toDoTime.after(searchTime)){
+                            matchingPIRs.add(pir);
+                        }
+                    } else if(pir.type.equals("Event")){
+                        EventPIR eventPIR = (EventPIR) pir;
+                        DateHandler eventTime = new DateHandler(eventPIR.date,eventPIR.startTime);
+                        if(eventTime.after(searchTime)){
+                            matchingPIRs.add(pir);
+                        }
+                    }
+                }
+                System.out.println("====================");
+                System.out.println("There are "+matchingPIRs.size()+" PIRs after "+inputTime);
+                for(PIR pir : matchingPIRs){
+                    int counter = 1;
+                    System.out.println(counter+". "+pir.topic);
+                    counter++;
+                }
+                System.out.println("====================");
+            } else if(choice == 3){
+                // Case 3
+                System.out.print("Please enter the Start Day (DD-MM-YYYY hh-mm): ");
+                String startDay = sc.nextLine();
+                System.out.print("Please enter the End Day (DD-MM-YYYY hh-mm): ");
+                String endDay = sc.nextLine();
+                DateHandler searchStartTime = new DateHandler(startDay);
+                DateHandler searchEndTime = new DateHandler(endDay);
+                for(PIR pir : pirList){
+                    if(pir.type.equals("Todo")){
+                        ToDoPIR toDoPIR = (ToDoPIR) pir;
+                        DateHandler toDoTime = new DateHandler(toDoPIR.getDeadline());
+                        if(toDoTime.after(searchStartTime) || toDoTime.before(searchEndTime)){
+                            matchingPIRs.add(pir);
+                        }
+                    } else if(pir.type.equals("Event")){
+                        EventPIR eventPIR = (EventPIR) pir;
+                        DateHandler eventTime = new DateHandler(eventPIR.date,eventPIR.startTime);
+                        if(eventTime.after(searchStartTime) || eventTime.before(searchEndTime)){
+                            matchingPIRs.add(pir);
+                        }
+                    }
+                }
+                System.out.println("====================");
+                System.out.println("There are "+matchingPIRs.size()+" PIRs within "+searchStartTime+" to"+searchEndTime);
+                for(PIR pir : matchingPIRs){
+                    int counter = 1;
+                    System.out.println(counter+". "+pir.topic);
+                    counter++;
+                }
+                System.out.println("====================");
+            }
+        }
     }
 
     public void print(){

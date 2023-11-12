@@ -5,7 +5,7 @@ import java.io.IOException;
 public class ToDoPIR extends PIR{
     String title;
     String description;
-    String deadline;
+    String deadline;    // DD-MM-YY hh-mm
 
     ToDoPIR(String type, int id,String topic ,String title, String description, String deadline){
         super(type, id, topic);
