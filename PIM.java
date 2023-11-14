@@ -121,7 +121,7 @@ public class PIM {
         Scanner sc = new Scanner(System.in);
         int fileCounter = 1;
         System.out.println("===== Modify =====");
-        System.out.println("There are "+getCountNo()+" PIRs");
+        System.out.println("There are "+pirList.size()+" PIRs");
         for(PIR pir:pirList){
             System.out.println(fileCounter+". "+pir.topic);
             fileCounter++;
