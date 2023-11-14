@@ -568,7 +568,7 @@ public class PIM {
         Scanner sc = new Scanner(System.in);
         int fileCounter = 1;
         System.out.println("===== Delete =====");
-        System.out.println("There are "+getCountNo()+" PIRs");
+        System.out.println("There are "+pirList.size()+" PIRs");
         for(PIR pir:pirList){
             System.out.println(fileCounter+". "+pir.topic);
             fileCounter++;
@@ -843,7 +843,7 @@ public class PIM {
                     Matcher idMatcherC = idPatternC.matcher(fileNameC);
                     if (idMatcherC.matches()) {
                         String id = idMatcherC.group(1);
-                        String type = "ToDo";
+                        String type = "todo";
                         String topic = null;
                         String title = null;
                         String description = null;
