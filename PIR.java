@@ -4,7 +4,7 @@ abstract public class PIR {
     String type;    // notes, to-dos, events, contacts
     int id;
     String topic;
-    static String path = "C:\\Users\\user\\Documents\\Java\\COMP3211\\PIM"; // path
+    static String path = "C:\\Users\\85255\\OneDrive - The Hong Kong Polytechnic University\\Documents\\java\\COMP3211\\PIM\\"; // path
 
     PIR(String type, int id, String topic){
         this.type = type;

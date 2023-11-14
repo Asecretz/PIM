@@ -6,6 +6,7 @@ public class ToDoPIR extends PIR{
     String title;
     String description;
     String deadline;    // DD-MM-YY hh-mm
+    boolean alarm;
 
     ToDoPIR(String type, int id,String topic ,String title, String description, String deadline){
         super(type, id, topic);

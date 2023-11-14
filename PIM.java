@@ -1,4 +1,5 @@
 import java.io.*;
+import java.time.LocalDate;
 import java.util.*;
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -12,7 +13,7 @@ public class PIM {
 
     List<PIR> pirList = new ArrayList<>();
     PIR pir;
-    static String path = "C:\\Users\\user\\Documents\\Java\\COMP3211\\PIM";  // path
+    static String path = "C:\\Users\\85255\\OneDrive - The Hong Kong Polytechnic University\\Documents\\java\\COMP3211\\PIM";  // path
 
     public PIM(){
         PIR pir;
@@ -21,6 +22,7 @@ public class PIM {
         Scanner sc = new Scanner(System.in);
         initial();
         while(true){
+            alarm();
             System.out.print("Welcome to Personal Information Manager\n1.Create\n2.Modify\n3.Search\n4.Print\n5.Delete\n6.Load\n7.Exit\nPlease enter a number: ");
             int input = sc.nextInt();
             select(input);
@@ -139,7 +141,7 @@ public class PIM {
                 System.out.println("This is you current topic: "+contactPIR.topic);
                 System.out.print("Please enter your new topic: ");
                 contactPIR.topic = sc.nextLine();
-                File fileToDelete = new File("C:\\Users\\user\\Documents\\Java\\COMP3211\\PIM\\"+"A"+contactPIR.id+".pim"); // path
+                File fileToDelete = new File("C:\\Users\\85255\\OneDrive - The Hong Kong Polytechnic University\\Documents\\java\\COMP3211\\PIM\\"+"A"+contactPIR.id+".pim"); // path
                 if(fileToDelete.delete()){
                     contactPIR.store();
                     pirList.remove(input-1);
@@ -152,7 +154,7 @@ public class PIM {
                 System.out.println("This is you current name: "+contactPIR.getName());
                 System.out.print("Please enter your new name: ");
                 contactPIR.setName(sc.nextLine());
-                File fileToDelete = new File("C:\\Users\\user\\Documents\\Java\\COMP3211\\PIM\\"+"A"+contactPIR.id+".pim"); // path
+                File fileToDelete = new File("C:\\Users\\85255\\OneDrive - The Hong Kong Polytechnic University\\Documents\\java\\COMP3211\\PIM\\"+"A"+contactPIR.id+".pim"); // path
                 if(fileToDelete.delete()){
                     contactPIR.store();
                     pirList.remove(input-1);
@@ -165,7 +167,7 @@ public class PIM {
                 System.out.println("This is you current address: "+contactPIR.getAddress());
                 System.out.print("Please enter your new address: ");
                 contactPIR.setAddress(sc.nextLine());
-                File fileToDelete = new File("C:\\Users\\user\\Documents\\Java\\COMP3211\\PIM\\"+"A"+contactPIR.id+".pim"); // path
+                File fileToDelete = new File("C:\\Users\\85255\\OneDrive - The Hong Kong Polytechnic University\\Documents\\java\\COMP3211\\PIM\\"+"A"+contactPIR.id+".pim"); // path
                 if(fileToDelete.delete()){
                     contactPIR.store();
                     pirList.remove(input-1);
@@ -178,7 +180,7 @@ public class PIM {
                 System.out.println("This is you current mobile number: "+contactPIR.getMobileNo());
                 System.out.print("Please enter your new mobile number: ");
                 contactPIR.setMobileNo(sc.nextLine());
-                File fileToDelete = new File("C:\\Users\\user\\Documents\\Java\\COMP3211\\PIM\\"+"A"+contactPIR.id+".pim"); // path
+                File fileToDelete = new File("C:\\Users\\85255\\OneDrive - The Hong Kong Polytechnic University\\Documents\\java\\COMP3211\\PIM\\"+"A"+contactPIR.id+".pim"); // path
                 if(fileToDelete.delete()){
                     contactPIR.store();
                     pirList.remove(input-1);
@@ -200,7 +202,7 @@ public class PIM {
                 System.out.println("This is you current topic: " + notePIR.topic);
                 System.out.print("Please enter your new topic: ");
                 notePIR.topic = sc.nextLine();
-                File fileToDelete = new File("C:\\Users\\user\\Documents\\Java\\COMP3211\\PIM\\" + "B" + notePIR.id + ".pim"); // path
+                File fileToDelete = new File("C:\\Users\\85255\\OneDrive - The Hong Kong Polytechnic University\\Documents\\java\\COMP3211\\PIM\\" + "B" + notePIR.id + ".pim"); // path
                 if (fileToDelete.delete()) {
                     notePIR.store();
                     pirList.remove(input-1);
@@ -213,7 +215,7 @@ public class PIM {
                 System.out.println("This is you current title: " + notePIR.getTitle());
                 System.out.print("Please enter your new title: ");
                 notePIR.setTitle(sc.nextLine());
-                File fileToDelete = new File("C:\\Users\\user\\Documents\\Java\\COMP3211\\PIM\\" + "B" + notePIR.getTitle() + ".pim"); // path
+                File fileToDelete = new File("C:\\Users\\85255\\OneDrive - The Hong Kong Polytechnic University\\Documents\\java\\COMP3211\\PIM\\" + "B" + notePIR.getTitle() + ".pim"); // path
                 if (fileToDelete.delete()) {
                     notePIR.store();
                     pirList.remove(input-1);
@@ -226,7 +228,7 @@ public class PIM {
                 System.out.println("This is you current texts: " + notePIR.getTexts());
                 System.out.print("Please enter your new texts: ");
                 notePIR.setTexts(sc.nextLine());
-                File fileToDelete = new File("C:\\Users\\user\\Documents\\Java\\COMP3211\\PIM\\" + "B" + notePIR.getTexts() + ".pim"); // path
+                File fileToDelete = new File("C:\\Users\\85255\\OneDrive - The Hong Kong Polytechnic University\\Documents\\java\\COMP3211\\PIM\\" + "B" + notePIR.getTexts() + ".pim"); // path
                 if (fileToDelete.delete()) {
                     notePIR.store();
                     pirList.remove(input-1);
@@ -248,7 +250,7 @@ public class PIM {
                 System.out.println("This is you current topic: " + toDoPIR.topic);
                 System.out.print("Please enter your new topic: ");
                 toDoPIR.topic = sc.nextLine();
-                File fileToDelete = new File("C:\\Users\\user\\Documents\\Java\\COMP3211\\PIM\\" + "C" + toDoPIR.id + ".pim"); // path
+                File fileToDelete = new File("C:\\Users\\85255\\OneDrive - The Hong Kong Polytechnic University\\Documents\\java\\COMP3211\\PIM\\" + "C" + toDoPIR.id + ".pim"); // path
                 if (fileToDelete.delete()) {
                     toDoPIR.store();
                     pirList.remove(input-1);
@@ -261,7 +263,7 @@ public class PIM {
                 System.out.println("This is you current title: " + toDoPIR.getTitle());
                 System.out.print("Please enter your new title: ");
                 toDoPIR.setTitle(sc.nextLine());
-                File fileToDelete = new File("C:\\Users\\user\\Documents\\Java\\COMP3211\\PIM\\" + "C" + toDoPIR.id + ".pim"); // path
+                File fileToDelete = new File("C:\\Users\\85255\\OneDrive - The Hong Kong Polytechnic University\\Documents\\java\\COMP3211\\PIM\\" + "C" + toDoPIR.id + ".pim"); // path
                 if (fileToDelete.delete()) {
                     toDoPIR.store();
                     pirList.remove(input-1);
@@ -274,7 +276,7 @@ public class PIM {
                 System.out.println("This is you current description: " + toDoPIR.getDescription());
                 System.out.print("Please enter your new description: ");
                 toDoPIR.setDescription(sc.nextLine());
-                File fileToDelete = new File("C:\\Users\\user\\Documents\\Java\\COMP3211\\PIM\\" + "C" + toDoPIR.id + ".pim"); // path
+                File fileToDelete = new File("C:\\Users\\85255\\OneDrive - The Hong Kong Polytechnic University\\Documents\\java\\COMP3211\\PIM\\" + "C" + toDoPIR.id + ".pim"); // path
                 if (fileToDelete.delete()) {
                     toDoPIR.store();
                     pirList.remove(input-1);
@@ -287,7 +289,7 @@ public class PIM {
                 System.out.println("This is you current deadline: " + toDoPIR.getDeadline());
                 System.out.print("Please enter your new deadline: ");
                 toDoPIR.setDeadline(sc.nextLine());
-                File fileToDelete = new File("C:\\Users\\user\\Documents\\Java\\COMP3211\\PIM\\" + "C" + toDoPIR.id + ".pim"); // path
+                File fileToDelete = new File("C:\\Users\\85255\\OneDrive - The Hong Kong Polytechnic University\\Documents\\java\\COMP3211\\PIM\\" + "C" + toDoPIR.id + ".pim"); // path
                 if (fileToDelete.delete()) {
                     toDoPIR.store();
                     pirList.remove(input-1);
@@ -309,7 +311,7 @@ public class PIM {
                 System.out.println("This is you current topic: " + eventPIR.topic);
                 System.out.print("Please enter your new topic: ");
                 eventPIR.topic = sc.nextLine();
-                File fileToDelete = new File("C:\\Users\\user\\Documents\\Java\\COMP3211\\PIM\\" + "D" + eventPIR.id + ".pim"); // path
+                File fileToDelete = new File("C:\\Users\\85255\\OneDrive - The Hong Kong Polytechnic University\\Documents\\java\\COMP3211\\PIM\\" + "D" + eventPIR.id + ".pim"); // path
                 if (fileToDelete.delete()) {
                     eventPIR.store();
                     pirList.remove(input-1);
@@ -322,7 +324,7 @@ public class PIM {
                 System.out.println("This is you current Title: " + eventPIR.getTitle());
                 System.out.print("Please enter your new Title: ");
                 eventPIR.setTitle(sc.nextLine());
-                File fileToDelete = new File("C:\\Users\\user\\Documents\\Java\\COMP3211\\PIM\\" + "D" + eventPIR.id + ".pim"); // path
+                File fileToDelete = new File("C:\\Users\\85255\\OneDrive - The Hong Kong Polytechnic University\\Documents\\java\\COMP3211\\PIM\\" + "D" + eventPIR.id + ".pim"); // path
                 if (fileToDelete.delete()) {
                     eventPIR.store();
                     pirList.remove(input-1);
@@ -335,7 +337,7 @@ public class PIM {
                 System.out.println("This is you current Description: " + eventPIR.getDescription());
                 System.out.print("Please enter your new Description: ");
                 eventPIR.setDescription(sc.nextLine());
-                File fileToDelete = new File("C:\\Users\\user\\Documents\\Java\\COMP3211\\PIM\\" + "D" + eventPIR.id + ".pim"); // path
+                File fileToDelete = new File("C:\\Users\\85255\\OneDrive - The Hong Kong Polytechnic University\\Documents\\java\\COMP3211\\PIM\\" + "D" + eventPIR.id + ".pim"); // path
                 if (fileToDelete.delete()) {
                     eventPIR.store();
                     pirList.remove(input - 1);
@@ -348,7 +350,7 @@ public class PIM {
                 System.out.println("This is you current Date: " + eventPIR.getDate());
                 System.out.print("Please enter your new Date (DD-MM-YYYY): ");
                 eventPIR.setDate(sc.nextLine());
-                File fileToDelete = new File("C:\\Users\\user\\Documents\\Java\\COMP3211\\PIM\\" + "D" + eventPIR.id + ".pim"); // path
+                File fileToDelete = new File("C:\\Users\\85255\\OneDrive - The Hong Kong Polytechnic University\\Documents\\java\\COMP3211\\PIM\\" + "D" + eventPIR.id + ".pim"); // path
                 if (fileToDelete.delete()) {
                     eventPIR.store();
                     pirList.remove(input - 1);
@@ -361,7 +363,7 @@ public class PIM {
                 System.out.println("This is you current Start Time: " + eventPIR.getStartTime());
                 System.out.print("Please enter your new Start Time (DD-MM-YYYY): ");
                 eventPIR.setStartTime(sc.nextLine());
-                File fileToDelete = new File("C:\\Users\\user\\Documents\\Java\\COMP3211\\PIM\\" + "D" + eventPIR.id + ".pim"); // path
+                File fileToDelete = new File("C:\\Users\\85255\\OneDrive - The Hong Kong Polytechnic University\\Documents\\java\\COMP3211\\PIM\\" + "D" + eventPIR.id + ".pim"); // path
                 if (fileToDelete.delete()) {
                     eventPIR.store();
                     pirList.remove(input - 1);
@@ -374,7 +376,7 @@ public class PIM {
                 System.out.println("This is you current End Time: " + eventPIR.getEndTime());
                 System.out.print("Please enter your new End Time (DD-MM-YYYY): ");
                 eventPIR.setEndTime(sc.nextLine());
-                File fileToDelete = new File("C:\\Users\\user\\Documents\\Java\\COMP3211\\PIM\\" + "D" + eventPIR.id + ".pim"); // path
+                File fileToDelete = new File("C:\\Users\\85255\\OneDrive - The Hong Kong Polytechnic University\\Documents\\java\\COMP3211\\PIM\\" + "D" + eventPIR.id + ".pim"); // path
                 if (fileToDelete.delete()) {
                     eventPIR.store();
                     pirList.remove(input - 1);
@@ -412,7 +414,7 @@ public class PIM {
                     if(notePIR.getTexts().contains(searchText)){
                         notePIR.print();
                     }
-                } else if(pir.type.equals("Todo")){
+                } else if(pir.type.equals("todo")){
                     // Todo description
                     ToDoPIR toDoPIR = (ToDoPIR) pir;
                     if(toDoPIR.getDescription().contains(searchText)) {
@@ -439,7 +441,7 @@ public class PIM {
                 String inputTime = sc.nextLine();
                 DateHandler searchTime = new DateHandler(inputTime);
                 for(PIR pir : pirList){
-                    if(pir.type.equals("Todo")){
+                    if(pir.type.equals("todo")){
                         ToDoPIR toDoPIR = (ToDoPIR) pir;
                         DateHandler toDoTime = new DateHandler(toDoPIR.getDeadline());
                         if(toDoTime.before(searchTime)){
@@ -468,7 +470,7 @@ public class PIM {
                 String inputTime = sc.nextLine();
                 DateHandler searchTime = new DateHandler(inputTime);
                 for(PIR pir : pirList){
-                    if(pir.type.equals("Todo")){
+                    if(pir.type.equals("todo")){
                         ToDoPIR toDoPIR = (ToDoPIR) pir;
                         DateHandler toDoTime = new DateHandler(toDoPIR.getDeadline());
                         if(toDoTime.after(searchTime)){
@@ -499,7 +501,7 @@ public class PIM {
                 DateHandler searchStartTime = new DateHandler(startDay);
                 DateHandler searchEndTime = new DateHandler(endDay);
                 for(PIR pir : pirList){
-                    if(pir.type.equals("Todo")){
+                    if(pir.type.equals("todo")){
                         ToDoPIR toDoPIR = (ToDoPIR) pir;
                         DateHandler toDoTime = new DateHandler(toDoPIR.getDeadline());
                         if(toDoTime.after(searchStartTime) || toDoTime.before(searchEndTime)){
@@ -545,7 +547,7 @@ public class PIM {
             }
         } else if(input == 3){
             for(PIR pir:pirList){
-                if(pir.type.equals("Todo")){
+                if(pir.type.equals("todo")){
                     pir.print();
                 }
             }
@@ -580,14 +582,14 @@ public class PIM {
             type = "A";
         } else if(pir.type.equals("Note")){
             type = "B";
-        } else if(pir.type.equals("Todo")){
+        } else if(pir.type.equals("todo")){
             type = "C";
         } else if(pir.type.equals("Event")){
             type = "D";
         } else {
             System.out.println("=== Delete function occur error ===");
         }
-        File fileToDelete = new File("C:\\Users\\user\\Documents\\Java\\COMP3211\\PIM\\" + type + pir.id + ".pim"); // path
+        File fileToDelete = new File("C:\\Users\\85255\\OneDrive - The Hong Kong Polytechnic University\\Documents\\java\\COMP3211\\PIM\\" + type + pir.id + ".pim"); // path
         if (fileToDelete.delete()) {
             pirList.remove(input - 1);
             System.out.println("=== Delete Successfully ===");
@@ -933,6 +935,49 @@ public class PIM {
             return documentCount;
         } else{
             return 0;
+        }
+    }
+
+    void alarm(){
+        LocalDate currentDate = LocalDate.now();
+        List<PIR> matchingPIRs = new ArrayList<>();
+        int day = currentDate.getDayOfMonth();
+        int month = currentDate.getMonthValue();
+        int year = currentDate.getYear();
+        int hour = currentDate.atStartOfDay().getHour();
+        int minute = currentDate.atStartOfDay().getMinute();
+        DateHandler current = new DateHandler(year,month,day,hour,minute);
+        for(PIR pir : pirList){
+            if(pir.type.equals("todo")){
+                // check todo deadline
+                ToDoPIR toDoPIR = (ToDoPIR) pir;
+                DateHandler deadline = new DateHandler(toDoPIR.getDeadline());
+                if(deadline.after(current)){
+                    matchingPIRs.add(toDoPIR);
+                }
+            } else if(pir.type.equals("Event")){
+                EventPIR eventPIR = (EventPIR) pir;
+                DateHandler eventDate = new DateHandler(eventPIR.date,eventPIR.getStartTime());
+                if(eventDate.after(current)){
+                    matchingPIRs.add(eventPIR);
+                }
+            }
+        }
+        if(!matchingPIRs.isEmpty()){
+            int counter = 1;
+            System.out.println("===== Alarm =====");
+            System.out.println("You have "+matchingPIRs.size()+" upcoming to-do or event.");
+            for(PIR pir : matchingPIRs){
+                if(pir.type.equals("todo")){
+                    ToDoPIR toDoPIR = (ToDoPIR) pir;
+                    System.out.println(counter+". "+toDoPIR.title+" Deadline: "+toDoPIR.deadline);
+                } else if(pir.type.equals("Event")){
+                    EventPIR eventPIR = (EventPIR) pir;
+                    System.out.println(counter+". "+eventPIR.title+" Date: "+eventPIR.date +" Start Time: "+eventPIR.startTime);
+                }
+                counter++;
+            }
+            System.out.println("======================");
         }
     }
 

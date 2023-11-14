@@ -25,6 +25,14 @@ public class DateHandler {
         minute = Integer.parseInt(timeParts[1]);
     }
 
+    DateHandler(int year, int month, int day, int hour, int minute){
+        this.year = year;
+        this.month = month;
+        this.day = day;
+        this.hour = hour;
+        this.minute = minute;
+    }
+
     public boolean before(DateHandler dateAndTime){
         if(this.year <= dateAndTime.year){
             return true;
