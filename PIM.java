@@ -13,7 +13,7 @@ public class PIM {
 
     List<PIR> pirList = new ArrayList<>();
     PIR pir;
-    static String path = ".\\PIM";  // path
+    static String path = ".\\PIM\\";  // path
 
     public PIM(){
         PIR pir;
