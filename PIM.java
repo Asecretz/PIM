@@ -13,7 +13,7 @@ public class PIM {
 
     List<PIR> pirList = new ArrayList<>();
     PIR pir;
-    static String path = ".\\PIM\\";  // path
+    static String path = "./PIM/";  // path
 
     public PIM(){
         PIR pir;
@@ -141,7 +141,7 @@ public class PIM {
                 System.out.println("This is you current topic: "+contactPIR.topic);
                 System.out.print("Please enter your new topic: ");
                 contactPIR.topic = sc.nextLine();
-                File fileToDelete = new File(".\\PIM\\"+"A"+contactPIR.id+".pim"); // path
+                File fileToDelete = new File(path+"A"+contactPIR.id+".pim"); // path
                 if(fileToDelete.delete()){
                     contactPIR.store();
                     pirList.remove(input-1);
@@ -154,7 +154,7 @@ public class PIM {
                 System.out.println("This is you current name: "+contactPIR.getName());
                 System.out.print("Please enter your new name: ");
                 contactPIR.setName(sc.nextLine());
-                File fileToDelete = new File(".\\PIM\\"+"A"+contactPIR.id+".pim"); // path
+                File fileToDelete = new File(path+"A"+contactPIR.id+".pim"); // path
                 if(fileToDelete.delete()){
                     contactPIR.store();
                     pirList.remove(input-1);
@@ -167,7 +167,7 @@ public class PIM {
                 System.out.println("This is you current address: "+contactPIR.getAddress());
                 System.out.print("Please enter your new address: ");
                 contactPIR.setAddress(sc.nextLine());
-                File fileToDelete = new File(".\\PIM\\"+"A"+contactPIR.id+".pim"); // path
+                File fileToDelete = new File(path+"A"+contactPIR.id+".pim"); // path
                 if(fileToDelete.delete()){
                     contactPIR.store();
                     pirList.remove(input-1);
@@ -180,7 +180,7 @@ public class PIM {
                 System.out.println("This is you current mobile number: "+contactPIR.getMobileNo());
                 System.out.print("Please enter your new mobile number: ");
                 contactPIR.setMobileNo(sc.nextLine());
-                File fileToDelete = new File(".\\PIM\\"+"A"+contactPIR.id+".pim"); // path
+                File fileToDelete = new File(path+"A"+contactPIR.id+".pim"); // path
                 if(fileToDelete.delete()){
                     contactPIR.store();
                     pirList.remove(input-1);
@@ -202,7 +202,7 @@ public class PIM {
                 System.out.println("This is you current topic: " + notePIR.topic);
                 System.out.print("Please enter your new topic: ");
                 notePIR.topic = sc.nextLine();
-                File fileToDelete = new File(".\\PIM\\" + "B" + notePIR.id + ".pim"); // path
+                File fileToDelete = new File(path + "B" + notePIR.id + ".pim"); // path
                 if (fileToDelete.delete()) {
                     notePIR.store();
                     pirList.remove(input-1);
@@ -215,7 +215,7 @@ public class PIM {
                 System.out.println("This is you current title: " + notePIR.getTitle());
                 System.out.print("Please enter your new title: ");
                 notePIR.setTitle(sc.nextLine());
-                File fileToDelete = new File(".\\PIM\\" + "B" + notePIR.getTitle() + ".pim"); // path
+                File fileToDelete = new File(path + "B" + notePIR.getTitle() + ".pim"); // path
                 if (fileToDelete.delete()) {
                     notePIR.store();
                     pirList.remove(input-1);
@@ -228,7 +228,7 @@ public class PIM {
                 System.out.println("This is you current texts: " + notePIR.getTexts());
                 System.out.print("Please enter your new texts: ");
                 notePIR.setTexts(sc.nextLine());
-                File fileToDelete = new File(".\\PIM\\" + "B" + notePIR.getTexts() + ".pim"); // path
+                File fileToDelete = new File(path + "B" + notePIR.getTexts() + ".pim"); // path
                 if (fileToDelete.delete()) {
                     notePIR.store();
                     pirList.remove(input-1);
@@ -250,7 +250,7 @@ public class PIM {
                 System.out.println("This is you current topic: " + toDoPIR.topic);
                 System.out.print("Please enter your new topic: ");
                 toDoPIR.topic = sc.nextLine();
-                File fileToDelete = new File(".\\PIM\\" + "C" + toDoPIR.id + ".pim"); // path
+                File fileToDelete = new File(path + "C" + toDoPIR.id + ".pim"); // path
                 if (fileToDelete.delete()) {
                     toDoPIR.store();
                     pirList.remove(input-1);
@@ -263,7 +263,7 @@ public class PIM {
                 System.out.println("This is you current title: " + toDoPIR.getTitle());
                 System.out.print("Please enter your new title: ");
                 toDoPIR.setTitle(sc.nextLine());
-                File fileToDelete = new File(".\\PIM\\" + "C" + toDoPIR.id + ".pim"); // path
+                File fileToDelete = new File(path + "C" + toDoPIR.id + ".pim"); // path
                 if (fileToDelete.delete()) {
                     toDoPIR.store();
                     pirList.remove(input-1);
@@ -276,7 +276,7 @@ public class PIM {
                 System.out.println("This is you current description: " + toDoPIR.getDescription());
                 System.out.print("Please enter your new description: ");
                 toDoPIR.setDescription(sc.nextLine());
-                File fileToDelete = new File(".\\PIM\\" + "C" + toDoPIR.id + ".pim"); // path
+                File fileToDelete = new File(path + "C" + toDoPIR.id + ".pim"); // path
                 if (fileToDelete.delete()) {
                     toDoPIR.store();
                     pirList.remove(input-1);
@@ -289,7 +289,7 @@ public class PIM {
                 System.out.println("This is you current deadline: " + toDoPIR.getDeadline());
                 System.out.print("Please enter your new deadline: ");
                 toDoPIR.setDeadline(sc.nextLine());
-                File fileToDelete = new File(".\\PIM\\" + "C" + toDoPIR.id + ".pim"); // path
+                File fileToDelete = new File(path + "C" + toDoPIR.id + ".pim"); // path
                 if (fileToDelete.delete()) {
                     toDoPIR.store();
                     pirList.remove(input-1);
@@ -311,7 +311,7 @@ public class PIM {
                 System.out.println("This is you current topic: " + eventPIR.topic);
                 System.out.print("Please enter your new topic: ");
                 eventPIR.topic = sc.nextLine();
-                File fileToDelete = new File(".\\PIM\\" + "D" + eventPIR.id + ".pim"); // path
+                File fileToDelete = new File(path + "D" + eventPIR.id + ".pim"); // path
                 if (fileToDelete.delete()) {
                     eventPIR.store();
                     pirList.remove(input-1);
@@ -324,7 +324,7 @@ public class PIM {
                 System.out.println("This is you current Title: " + eventPIR.getTitle());
                 System.out.print("Please enter your new Title: ");
                 eventPIR.setTitle(sc.nextLine());
-                File fileToDelete = new File(".\\PIM\\" + "D" + eventPIR.id + ".pim"); // path
+                File fileToDelete = new File(path + "D" + eventPIR.id + ".pim"); // path
                 if (fileToDelete.delete()) {
                     eventPIR.store();
                     pirList.remove(input-1);
@@ -337,7 +337,7 @@ public class PIM {
                 System.out.println("This is you current Description: " + eventPIR.getDescription());
                 System.out.print("Please enter your new Description: ");
                 eventPIR.setDescription(sc.nextLine());
-                File fileToDelete = new File(".\\PIM\\" + "D" + eventPIR.id + ".pim"); // path
+                File fileToDelete = new File(path + "D" + eventPIR.id + ".pim"); // path
                 if (fileToDelete.delete()) {
                     eventPIR.store();
                     pirList.remove(input - 1);
@@ -350,7 +350,7 @@ public class PIM {
                 System.out.println("This is you current Date: " + eventPIR.getDate());
                 System.out.print("Please enter your new Date (DD-MM-YYYY): ");
                 eventPIR.setDate(sc.nextLine());
-                File fileToDelete = new File(".\\PIM\\" + "D" + eventPIR.id + ".pim"); // path
+                File fileToDelete = new File(path + "D" + eventPIR.id + ".pim"); // path
                 if (fileToDelete.delete()) {
                     eventPIR.store();
                     pirList.remove(input - 1);
@@ -363,7 +363,7 @@ public class PIM {
                 System.out.println("This is you current Start Time: " + eventPIR.getStartTime());
                 System.out.print("Please enter your new Start Time (DD-MM-YYYY): ");
                 eventPIR.setStartTime(sc.nextLine());
-                File fileToDelete = new File(".\\PIM\\" + "D" + eventPIR.id + ".pim"); // path
+                File fileToDelete = new File(path + "D" + eventPIR.id + ".pim"); // path
                 if (fileToDelete.delete()) {
                     eventPIR.store();
                     pirList.remove(input - 1);
@@ -376,7 +376,7 @@ public class PIM {
                 System.out.println("This is you current End Time: " + eventPIR.getEndTime());
                 System.out.print("Please enter your new End Time (DD-MM-YYYY): ");
                 eventPIR.setEndTime(sc.nextLine());
-                File fileToDelete = new File(".\\PIM\\" + "D" + eventPIR.id + ".pim"); // path
+                File fileToDelete = new File(path + "D" + eventPIR.id + ".pim"); // path
                 if (fileToDelete.delete()) {
                     eventPIR.store();
                     pirList.remove(input - 1);
@@ -589,7 +589,7 @@ public class PIM {
         } else {
             System.out.println("=== Delete function occur error ===");
         }
-        File fileToDelete = new File(".\\PIM\\" + type + pir.id + ".pim"); // path
+        File fileToDelete = new File(path + type + pir.id + ".pim"); // path
         if (fileToDelete.delete()) {
             pirList.remove(input - 1);
             System.out.println("=== Delete Successfully ===");
