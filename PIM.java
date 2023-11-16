@@ -455,14 +455,21 @@ public class PIM {
                         }
                     }
                 }
-                System.out.println("====================");
-                System.out.println("There are "+matchingPIRs.size()+" PIRs before "+inputTime);
-                int counter = 1;
-                for(PIR pir : matchingPIRs){
-                    System.out.println(counter+". "+pir.topic);
-                    counter++;
+                if(!matchingPIRs.isEmpty()) {
+                    int counter = 1;
+                    System.out.println("You have " + matchingPIRs.size() + " before " + inputTime);
+                    for (PIR pir : matchingPIRs) {
+                        if (pir.type.equals("todo")) {
+                            ToDoPIR toDoPIR = (ToDoPIR) pir;
+                            System.out.println(counter + ". " + toDoPIR.title + " Deadline: " + toDoPIR.deadline);
+                        } else if (pir.type.equals("Event")) {
+                            EventPIR eventPIR = (EventPIR) pir;
+                            System.out.println(counter + ". " + eventPIR.title + " Date: " + eventPIR.date + " Start Time: " + eventPIR.startTime);
+                        }
+                        counter++;
+                    }
+                    System.out.println("======================");
                 }
-                System.out.println("====================");
 
             } else if(choice == 2){
                 // Case 2
@@ -484,14 +491,21 @@ public class PIM {
                         }
                     }
                 }
-                System.out.println("====================");
-                System.out.println("There are "+matchingPIRs.size()+" PIRs after "+inputTime);
-                int counter = 1;
-                for(PIR pir : matchingPIRs){
-                    System.out.println(counter+". "+pir.topic);
-                    counter++;
+                if(!matchingPIRs.isEmpty()) {
+                    int counter = 1;
+                    System.out.println("You have " + matchingPIRs.size() + " after " + inputTime);
+                    for (PIR pir : matchingPIRs) {
+                        if (pir.type.equals("todo")) {
+                            ToDoPIR toDoPIR = (ToDoPIR) pir;
+                            System.out.println(counter + ". " + toDoPIR.title + " Deadline: " + toDoPIR.deadline);
+                        } else if (pir.type.equals("Event")) {
+                            EventPIR eventPIR = (EventPIR) pir;
+                            System.out.println(counter + ". " + eventPIR.title + " Date: " + eventPIR.date + " Start Time: " + eventPIR.startTime);
+                        }
+                        counter++;
+                    }
+                    System.out.println("======================");
                 }
-                System.out.println("====================");
             } else if(choice == 3){
                 // Case 3
                 System.out.print("Please enter the Start Day (DD-MM-YYYY hh-mm): ");
@@ -515,14 +529,21 @@ public class PIM {
                         }
                     }
                 }
-                System.out.println("====================");
-                System.out.println("There are "+matchingPIRs.size()+" PIRs within "+searchStartTime+" to"+searchEndTime);
-                int counter = 1;
-                for(PIR pir : matchingPIRs){
-                    System.out.println(counter+". "+pir.topic);
-                    counter++;
+                if(!matchingPIRs.isEmpty()) {
+                    int counter = 1;
+                    System.out.println("You have " + matchingPIRs.size() + " within " + searchStartTime+"to "+searchEndTime);
+                    for (PIR pir : matchingPIRs) {
+                        if (pir.type.equals("todo")) {
+                            ToDoPIR toDoPIR = (ToDoPIR) pir;
+                            System.out.println(counter + ". " + toDoPIR.title + " Deadline: " + toDoPIR.deadline);
+                        } else if (pir.type.equals("Event")) {
+                            EventPIR eventPIR = (EventPIR) pir;
+                            System.out.println(counter + ". " + eventPIR.title + " Date: " + eventPIR.date + " Start Time: " + eventPIR.startTime);
+                        }
+                        counter++;
+                    }
+                    System.out.println("======================");
                 }
-                System.out.println("====================");
             }
         }
     }
@@ -939,14 +960,15 @@ public class PIM {
     }
 
     void alarm(){
-        LocalDate currentDate = LocalDate.now();
+        Calendar calendar = Calendar.getInstance();
         List<PIR> matchingPIRs = new ArrayList<>();
-        int day = currentDate.getDayOfMonth();
-        int month = currentDate.getMonthValue();
-        int year = currentDate.getYear();
-        int hour = currentDate.atStartOfDay().getHour();
-        int minute = currentDate.atStartOfDay().getMinute();
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+        int month = calendar.get(Calendar.MONTH) + 1;
+        int year = calendar.get(Calendar.YEAR);
+        int hour = calendar.get(Calendar.HOUR_OF_DAY);
+        int minute = calendar.get(Calendar.MINUTE);
         DateHandler current = new DateHandler(year,month,day,hour,minute);
+
         for(PIR pir : pirList){
             if(pir.type.equals("todo")){
                 // check todo deadline

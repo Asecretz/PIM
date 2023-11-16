@@ -8,9 +8,9 @@ public class DateHandler {
     DateHandler(String dateAndTime){
         // DD-MM-YY hh-mm
         String[] parts = dateAndTime.split(" |-");
-        year = Integer.parseInt(parts[0]);
+        year = Integer.parseInt(parts[2]);
         month = Integer.parseInt(parts[1]);
-        day = Integer.parseInt(parts[2]);
+        day = Integer.parseInt(parts[0]);
         hour = Integer.parseInt(parts[3]);
         minute = Integer.parseInt(parts[4]);
     }
@@ -18,9 +18,9 @@ public class DateHandler {
     DateHandler(String date, String time){
         String[] dateParts = date.split("-");
         String[] timeParts = time.split("-");
-        year = Integer.parseInt(dateParts[0]);
+        year = Integer.parseInt(dateParts[2]);
         month = Integer.parseInt(dateParts[1]);
-        day = Integer.parseInt(dateParts[2]);
+        day = Integer.parseInt(dateParts[0]);
         hour = Integer.parseInt(timeParts[0]);
         minute = Integer.parseInt(timeParts[1]);
     }
@@ -34,27 +34,31 @@ public class DateHandler {
     }
 
     public boolean before(DateHandler dateAndTime){
-        if(this.year <= dateAndTime.year){
-            return true;
-        } else if(this.month <= dateAndTime.month){
-            return true;
-        } else if(this.day <= dateAndTime.day){
-            return true;
-        } else if(this.hour <= dateAndTime.hour){
-            return true;
-        } else return this.minute <= dateAndTime.minute;
+        if(this.year > dateAndTime.year){
+            return false;
+        } else if(this.month > dateAndTime.month){
+            return false;
+        } else if(this.day > dateAndTime.day){
+            return false;
+        } else if(this.hour > dateAndTime.hour){
+            return false;
+        } else{
+            return this.minute <= dateAndTime.minute;
+        }
     }
 
     public boolean after(DateHandler dateAndTime){
-        if(this.year >= dateAndTime.year){
-            return true;
-        } else if(this.month >= dateAndTime.month){
-            return true;
-        } else if(this.day >= dateAndTime.day){
-            return true;
-        } else if(this.hour >= dateAndTime.hour){
-            return true;
-        } else return this.minute >= dateAndTime.minute;
+        if(this.year < dateAndTime.year){
+            return false;
+        } else if(this.month < dateAndTime.month){
+            return false;
+        } else if(this.day < dateAndTime.day){
+            return false;
+        } else if(this.hour < dateAndTime.hour){
+            return false;
+        } else{
+            return this.minute >= dateAndTime.minute;
+        }
     }
 
 
