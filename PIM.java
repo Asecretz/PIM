@@ -457,7 +457,8 @@ public class PIM {
                 }
                 if(!matchingPIRs.isEmpty()) {
                     int counter = 1;
-                    System.out.println("You have " + matchingPIRs.size() + " before " + inputTime);
+                    System.out.println("======================");
+                    System.out.println("There are " + matchingPIRs.size() + " PIRs before " + inputTime);
                     for (PIR pir : matchingPIRs) {
                         if (pir.type.equals("todo")) {
                             ToDoPIR toDoPIR = (ToDoPIR) pir;
@@ -468,6 +469,10 @@ public class PIM {
                         }
                         counter++;
                     }
+                    System.out.println("======================");
+                } else{
+                    System.out.println("======================");
+                    System.out.println("There are " + 0 + " PIRs before " + inputTime);
                     System.out.println("======================");
                 }
 
@@ -493,7 +498,8 @@ public class PIM {
                 }
                 if(!matchingPIRs.isEmpty()) {
                     int counter = 1;
-                    System.out.println("You have " + matchingPIRs.size() + " after " + inputTime);
+                    System.out.println("======================");
+                    System.out.println("There are " + matchingPIRs.size() + "PIRs after " + inputTime);
                     for (PIR pir : matchingPIRs) {
                         if (pir.type.equals("todo")) {
                             ToDoPIR toDoPIR = (ToDoPIR) pir;
@@ -504,6 +510,10 @@ public class PIM {
                         }
                         counter++;
                     }
+                    System.out.println("======================");
+                } else{
+                    System.out.println("======================");
+                    System.out.println("There are " + 0 + " PIRs before " + inputTime);
                     System.out.println("======================");
                 }
             } else if(choice == 3){
@@ -531,7 +541,8 @@ public class PIM {
                 }
                 if(!matchingPIRs.isEmpty()) {
                     int counter = 1;
-                    System.out.println("You have " + matchingPIRs.size() + " within " + searchStartTime+"to "+searchEndTime);
+                    System.out.println("======================");
+                    System.out.println("There are " + matchingPIRs.size() + " PIRs within " + searchStartTime+"to "+searchEndTime);
                     for (PIR pir : matchingPIRs) {
                         if (pir.type.equals("todo")) {
                             ToDoPIR toDoPIR = (ToDoPIR) pir;
@@ -542,6 +553,10 @@ public class PIM {
                         }
                         counter++;
                     }
+                    System.out.println("======================");
+                } else{
+                    System.out.println("======================");
+                    System.out.println("There are " + 0 + " PIRs within " + searchStartTime+"to "+searchEndTime);
                     System.out.println("======================");
                 }
             }
