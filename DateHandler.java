@@ -33,31 +33,35 @@ public class DateHandler {
         this.minute = minute;
     }
 
-    public boolean before(DateHandler dateAndTime){
-        if(this.year > dateAndTime.year){
+    public boolean before(DateHandler dateAndTime) {
+        if (this.year < dateAndTime.year) {
+            return true;
+        } else if (this.year == dateAndTime.year && this.month < dateAndTime.month) {
+            return true;
+        } else if (this.year == dateAndTime.year && this.month == dateAndTime.month && this.day < dateAndTime.day) {
+            return true;
+        } else if (this.year == dateAndTime.year && this.month == dateAndTime.month && this.day == dateAndTime.day && this.hour < dateAndTime.hour) {
+            return true;
+        } else if (this.year == dateAndTime.year && this.month == dateAndTime.month && this.day == dateAndTime.day && this.hour == dateAndTime.hour && this.minute < dateAndTime.minute) {
+            return true;
+        } else {
             return false;
-        } else if(this.month > dateAndTime.month){
-            return false;
-        } else if(this.day > dateAndTime.day){
-            return false;
-        } else if(this.hour > dateAndTime.hour){
-            return false;
-        } else{
-            return this.minute <= dateAndTime.minute;
         }
     }
 
-    public boolean after(DateHandler dateAndTime){
-        if(this.year < dateAndTime.year){
+    public boolean after(DateHandler dateAndTime) {
+        if (this.year > dateAndTime.year) {
+            return true;
+        } else if (this.year == dateAndTime.year && this.month > dateAndTime.month) {
+            return true;
+        } else if (this.year == dateAndTime.year && this.month == dateAndTime.month && this.day > dateAndTime.day) {
+            return true;
+        } else if (this.year == dateAndTime.year && this.month == dateAndTime.month && this.day == dateAndTime.day && this.hour > dateAndTime.hour) {
+            return true;
+        } else if (this.year == dateAndTime.year && this.month == dateAndTime.month && this.day == dateAndTime.day && this.hour == dateAndTime.hour && this.minute > dateAndTime.minute) {
+            return true;
+        } else {
             return false;
-        } else if(this.month < dateAndTime.month){
-            return false;
-        } else if(this.day < dateAndTime.day){
-            return false;
-        } else if(this.hour < dateAndTime.hour){
-            return false;
-        } else{
-            return this.minute >= dateAndTime.minute;
         }
     }
 

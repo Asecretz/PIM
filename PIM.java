@@ -239,7 +239,7 @@ public class PIM {
             } else{
                 System.out.println("===== Wrong Input ======");
             }
-        } else if(pir.type.equals("Todo")){
+        } else if(pir.type.equals("todo")){
             // Todo Part
             ToDoPIR toDoPIR = (ToDoPIR) pir;
             System.out.print("1. Topic\n2. Title\n3. Description\n4. Deadline\nPlease enter a number: ");
@@ -528,13 +528,13 @@ public class PIM {
                     if(pir.type.equals("todo")){
                         ToDoPIR toDoPIR = (ToDoPIR) pir;
                         DateHandler toDoTime = new DateHandler(toDoPIR.getDeadline());
-                        if(toDoTime.after(searchStartTime) || toDoTime.before(searchEndTime)){
+                        if(toDoTime.after(searchStartTime) && toDoTime.before(searchEndTime)){
                             matchingPIRs.add(pir);
                         }
                     } else if(pir.type.equals("Event")){
                         EventPIR eventPIR = (EventPIR) pir;
                         DateHandler eventTime = new DateHandler(eventPIR.date,eventPIR.startTime);
-                        if(eventTime.after(searchStartTime) || eventTime.before(searchEndTime)){
+                        if(eventTime.after(searchStartTime) && eventTime.before(searchEndTime)){
                             matchingPIRs.add(pir);
                         }
                     }
@@ -542,7 +542,7 @@ public class PIM {
                 if(!matchingPIRs.isEmpty()) {
                     int counter = 1;
                     System.out.println("======================");
-                    System.out.println("There are " + matchingPIRs.size() + " PIRs within " + searchStartTime+"to "+searchEndTime);
+                    System.out.println("There are " + matchingPIRs.size() + " PIRs within " + startDay+" to "+endDay);
                     for (PIR pir : matchingPIRs) {
                         if (pir.type.equals("todo")) {
                             ToDoPIR toDoPIR = (ToDoPIR) pir;
@@ -556,7 +556,7 @@ public class PIM {
                     System.out.println("======================");
                 } else{
                     System.out.println("======================");
-                    System.out.println("There are " + 0 + " PIRs within " + searchStartTime+"to "+searchEndTime);
+                    System.out.println("There are " + 0 + " PIRs within " + startDay+" to "+endDay);
                     System.out.println("======================");
                 }
             }
@@ -994,7 +994,7 @@ public class PIM {
                 }
             } else if(pir.type.equals("Event")){
                 EventPIR eventPIR = (EventPIR) pir;
-                DateHandler eventDate = new DateHandler(eventPIR.date,eventPIR.getStartTime());
+                DateHandler eventDate = new DateHandler(eventPIR.getDate(),eventPIR.getStartTime());
                 if(eventDate.after(current)){
                     matchingPIRs.add(eventPIR);
                 }
