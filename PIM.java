@@ -457,8 +457,8 @@ public class PIM {
                 }
                 System.out.println("====================");
                 System.out.println("There are "+matchingPIRs.size()+" PIRs before "+inputTime);
+                int counter = 1;
                 for(PIR pir : matchingPIRs){
-                    int counter = 1;
                     System.out.println(counter+". "+pir.topic);
                     counter++;
                 }
@@ -486,8 +486,8 @@ public class PIM {
                 }
                 System.out.println("====================");
                 System.out.println("There are "+matchingPIRs.size()+" PIRs after "+inputTime);
+                int counter = 1;
                 for(PIR pir : matchingPIRs){
-                    int counter = 1;
                     System.out.println(counter+". "+pir.topic);
                     counter++;
                 }
@@ -517,8 +517,8 @@ public class PIM {
                 }
                 System.out.println("====================");
                 System.out.println("There are "+matchingPIRs.size()+" PIRs within "+searchStartTime+" to"+searchEndTime);
+                int counter = 1;
                 for(PIR pir : matchingPIRs){
-                    int counter = 1;
                     System.out.println(counter+". "+pir.topic);
                     counter++;
                 }
