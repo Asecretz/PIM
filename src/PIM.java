@@ -13,7 +13,7 @@ public class PIM {
 
     List<PIR> pirList = new ArrayList<>();
     PIR pir;
-    static String path = "./PIM/";  // path
+    static String path = "./src/PIM/";  // path
 
     public PIM(){
         PIR pir;
@@ -215,7 +215,7 @@ public class PIM {
                 System.out.println("This is you current title: " + notePIR.getTitle());
                 System.out.print("Please enter your new title: ");
                 notePIR.setTitle(sc.nextLine());
-                File fileToDelete = new File(path + "B" + notePIR.getTitle() + ".pim"); // path
+                File fileToDelete = new File(path + "B" + notePIR.id + ".pim"); // path
                 if (fileToDelete.delete()) {
                     notePIR.store();
                     pirList.remove(input-1);
@@ -224,11 +224,11 @@ public class PIM {
                     System.out.println("=== Modify function occur error ===");
                 }
             } else if(choice == 3) {
-                // Title modify
+                // Texts modify
                 System.out.println("This is you current texts: " + notePIR.getTexts());
                 System.out.print("Please enter your new texts: ");
                 notePIR.setTexts(sc.nextLine());
-                File fileToDelete = new File(path + "B" + notePIR.getTexts() + ".pim"); // path
+                File fileToDelete = new File(path + "B" + notePIR.id + ".pim"); // path
                 if (fileToDelete.delete()) {
                     notePIR.store();
                     pirList.remove(input-1);
@@ -449,7 +449,7 @@ public class PIM {
                         }
                     } else if(pir.type.equals("Event")){
                         EventPIR eventPIR = (EventPIR) pir;
-                        DateHandler eventTime = new DateHandler(eventPIR.date,eventPIR.startTime);
+                        DateHandler eventTime = new DateHandler(eventPIR.getDate(),eventPIR.getStartTime());
                         if(eventTime.before(searchTime)){
                             matchingPIRs.add(pir);
                         }
@@ -462,10 +462,10 @@ public class PIM {
                     for (PIR pir : matchingPIRs) {
                         if (pir.type.equals("todo")) {
                             ToDoPIR toDoPIR = (ToDoPIR) pir;
-                            System.out.println(counter + ". " + toDoPIR.title + " Deadline: " + toDoPIR.deadline);
+                            System.out.println(counter + ". " + toDoPIR.getTitle() + " Deadline: " + toDoPIR.getDeadline());
                         } else if (pir.type.equals("Event")) {
                             EventPIR eventPIR = (EventPIR) pir;
-                            System.out.println(counter + ". " + eventPIR.title + " Date: " + eventPIR.date + " Start Time: " + eventPIR.startTime);
+                            System.out.println(counter + ". " + eventPIR.getTitle() + " Date: " + eventPIR.getDate() + " Start Time: " + eventPIR.getStartTime());
                         }
                         counter++;
                     }
@@ -490,7 +490,7 @@ public class PIM {
                         }
                     } else if(pir.type.equals("Event")){
                         EventPIR eventPIR = (EventPIR) pir;
-                        DateHandler eventTime = new DateHandler(eventPIR.date,eventPIR.startTime);
+                        DateHandler eventTime = new DateHandler(eventPIR.getDate(),eventPIR.getStartTime());
                         if(eventTime.after(searchTime)){
                             matchingPIRs.add(pir);
                         }
@@ -503,10 +503,10 @@ public class PIM {
                     for (PIR pir : matchingPIRs) {
                         if (pir.type.equals("todo")) {
                             ToDoPIR toDoPIR = (ToDoPIR) pir;
-                            System.out.println(counter + ". " + toDoPIR.title + " Deadline: " + toDoPIR.deadline);
+                            System.out.println(counter + ". " + toDoPIR.getTitle() + " Deadline: " + toDoPIR.getDeadline());
                         } else if (pir.type.equals("Event")) {
                             EventPIR eventPIR = (EventPIR) pir;
-                            System.out.println(counter + ". " + eventPIR.title + " Date: " + eventPIR.date + " Start Time: " + eventPIR.startTime);
+                            System.out.println(counter + ". " + eventPIR.getTitle() + " Date: " + eventPIR.getDate() + " Start Time: " + eventPIR.getStartTime());
                         }
                         counter++;
                     }
@@ -533,7 +533,7 @@ public class PIM {
                         }
                     } else if(pir.type.equals("Event")){
                         EventPIR eventPIR = (EventPIR) pir;
-                        DateHandler eventTime = new DateHandler(eventPIR.date,eventPIR.startTime);
+                        DateHandler eventTime = new DateHandler(eventPIR.getDate(),eventPIR.getStartTime());
                         if(eventTime.after(searchStartTime) && eventTime.before(searchEndTime)){
                             matchingPIRs.add(pir);
                         }
@@ -546,10 +546,10 @@ public class PIM {
                     for (PIR pir : matchingPIRs) {
                         if (pir.type.equals("todo")) {
                             ToDoPIR toDoPIR = (ToDoPIR) pir;
-                            System.out.println(counter + ". " + toDoPIR.title + " Deadline: " + toDoPIR.deadline);
+                            System.out.println(counter + ". " + toDoPIR.getTitle() + " Deadline: " + toDoPIR.getDeadline());
                         } else if (pir.type.equals("Event")) {
                             EventPIR eventPIR = (EventPIR) pir;
-                            System.out.println(counter + ". " + eventPIR.title + " Date: " + eventPIR.date + " Start Time: " + eventPIR.startTime);
+                            System.out.println(counter + ". " + eventPIR.getTitle() + " Date: " + eventPIR.getDate() + " Start Time: " + eventPIR.getStartTime());
                         }
                         counter++;
                     }
@@ -624,6 +624,7 @@ public class PIM {
             type = "D";
         } else {
             System.out.println("=== Delete function occur error ===");
+            System.out.println("=== Wrong FileName detected ===");
         }
         File fileToDelete = new File(path + type + pir.id + ".pim"); // path
         if (fileToDelete.delete()) {
@@ -635,8 +636,7 @@ public class PIM {
     }
 
     public void load(){
-        // Philbert's gf Part
-        // enter "I give up" to earn 3 pts
+        // Load PIR into PIM
         Scanner sc = new Scanner(System.in);
         System.out.println("===== Load =====");
         System.out.print("Please enter the path of PIM file: ");
@@ -720,7 +720,7 @@ public class PIM {
             Matcher idMatcherC = idPatternC.matcher(fileNameC);
             if (idMatcherC.matches()) {
                 String id = idMatcherC.group(1);
-                String type = "ToDo";
+                String type = "todo";
                 String topic = null;
                 String title = null;
                 String description = null;
@@ -1007,10 +1007,10 @@ public class PIM {
             for(PIR pir : matchingPIRs){
                 if(pir.type.equals("todo")){
                     ToDoPIR toDoPIR = (ToDoPIR) pir;
-                    System.out.println(counter+". "+toDoPIR.title+" Deadline: "+toDoPIR.deadline);
+                    System.out.println(counter+". "+toDoPIR.getTitle()+" Deadline: "+toDoPIR.getDeadline());
                 } else if(pir.type.equals("Event")){
                     EventPIR eventPIR = (EventPIR) pir;
-                    System.out.println(counter+". "+eventPIR.title+" Date: "+eventPIR.date +" Start Time: "+eventPIR.startTime);
+                    System.out.println(counter+". "+eventPIR.getTitle()+" Date: "+eventPIR.getDate() +" Start Time: "+eventPIR.getStartTime());
                 }
                 counter++;
             }

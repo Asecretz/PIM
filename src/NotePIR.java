@@ -4,8 +4,8 @@ import java.io.IOException;
 
 public class NotePIR extends PIR{
 
-    String title;
-    String texts;
+    private String title;
+    private String texts;
 
     NotePIR(String type, int id,String topic, String title, String texts){
         super(type, id, topic);

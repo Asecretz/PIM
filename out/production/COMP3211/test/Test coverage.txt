@@ -1,0 +1,3 @@
+The line covered of PIM and methods are 68% and 69% respectively.
+However, the test have covered all the commands of user requirement
+such as Create, Modify, Search, Print, Delete, and Load.

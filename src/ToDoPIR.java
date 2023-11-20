@@ -3,9 +3,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class ToDoPIR extends PIR{
-    String title;
-    String description;
-    String deadline;    // DD-MM-YY hh-mm
+    private String title;
+    private String description;
+    private String deadline;    // DD-MM-YY hh-mm
 
     ToDoPIR(String type, int id,String topic ,String title, String description, String deadline){
         super(type, id, topic);

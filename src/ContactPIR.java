@@ -3,9 +3,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 public class ContactPIR extends PIR{
 
-    String name;
-    String address;
-    String mobileNo;
+    private String name;
+    private String address;
+    private String mobileNo;
 
     ContactPIR(String type, int id,String topic,String name,String address, String mobileNo){
         super(type, id, topic);
@@ -68,4 +68,5 @@ public class ContactPIR extends PIR{
     public String getMobileNo(){
         return mobileNo;
     }
+
 }

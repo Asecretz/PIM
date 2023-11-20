@@ -3,12 +3,12 @@ import java.io.FileWriter;
 import java.io.IOException;
 public class EventPIR extends PIR{
 
-    String title;
-    String description;
-    String date;  // year, month, day
+    private String title;
+    private String description;
+    private String date;  // year, month, day
 
-    String startTime; // hour, minutes
-    String endTime; // hour, minutes
+    private String startTime; // hour, minutes
+    private String endTime; // hour, minutes
 
     EventPIR(String type, int id,String topic,String title,String description,String date,String startTime,String endTime){
         super(type, id, topic);
